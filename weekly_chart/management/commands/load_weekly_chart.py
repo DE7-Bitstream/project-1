@@ -15,12 +15,12 @@ class Command(BaseCommand):
         # 기존 데이터 삭제 여부
         parser.add_argument(
             '--clear',        
-            action='store_true', # 인자 없이 플래그만 있으면 True로 저장
+            action='store_true',
             help='저장 전 기존 데이터 삭제, 기본적으로 False입니다.',
         )
     
     def handle(self, *args, **options):    
-        should_clear = options['clear'] if options['clear'] else False
+        should_clear = options['clear']
 
         try:
             if should_clear:
