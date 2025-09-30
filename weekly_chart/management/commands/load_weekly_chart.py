@@ -16,11 +16,11 @@ class Command(BaseCommand):
         parser.add_argument(
             '--clear',        
             action='store_true', # 인자 없이 플래그만 있으면 True로 저장
-            help='저장 전 기존 데이터 삭제',
+            help='저장 전 기존 데이터 삭제, 기본적으로 False입니다.',
         )
     
     def handle(self, *args, **options):    
-        should_clear = options['clear'] if options['clear'] else True
+        should_clear = options['clear'] if options['clear'] else False
 
         try:
             if should_clear:
@@ -43,7 +43,7 @@ class Command(BaseCommand):
                     total_rows = 0
                     created_count = 0
                     
-                    # bulk_create를 위한 객체 리스트 준비
+                    # bulk_create를 위한 리스트
                     chart_objects = []
                     
                     for row in reader:
@@ -65,12 +65,12 @@ class Command(BaseCommand):
                             self.stdout.write(self.style.ERROR(f"Missing column in CSV: {e}"))
                             return
                         except ValueError as e:
-                            # 데이터 타입 변환 오류 발생 시 (예: rank에 숫자가 아닌 문자열)
+                            # 데이터 타입 변환 오류 처리
                             self.stdout.write(self.style.ERROR(f"Data type error on row {total_rows}: {e}. Skipping row."))
-                            continue # 오류가 발생한 행은 건너뜁니다.
+                            continue # 건너뛰기
 
 
-                    # bulk_create를 사용하여 한 번의 쿼리로 대량 삽입
+                    # bulk_create를 사용하여 대량 삽입
                     created_objects = WeeklyChart.objects.bulk_create(chart_objects)
                     created_count = len(created_objects)
 
