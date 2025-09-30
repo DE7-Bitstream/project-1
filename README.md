@@ -1,4 +1,44 @@
 # web-service
 
+만드신 각 app의 html에서, 아래 코드를 이용하면 레이아웃 사용할 수 있습니다.  
 
-django 프로젝트 담을 repository
+
+```html
+{% extends "layout.html" %}
+
+{% block content %}
+  <h2>이건 weekly_chart 페이지입니다</h2>
+  <p>파이팅.</p>
+{% endblock %}
+```   
+
+`templates/layout.html` 은 베이스 html 파일  
+`static/` 내부 파일들은 `layout.html` 에서 사용한 style과 이미지이고,  
+`bitstream/settings.py` 내부에서   
+```python
+...
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR, "templates"],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+...
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+
+```  
+
+수정해서 templates와 static 반영하게 수정했습니다.
