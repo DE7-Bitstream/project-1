@@ -7,39 +7,54 @@
     <h1>{{ year }}년 {{ month }}월 (Top {{ max_rank }})</h1>
 
     <!-- 캔버스 -->
-    <div class="chart-container" style="height: 400px; max-width: 800px; margin: 0 auto;">
+    <div class="chart-container" style="max-width: 800px; margin: 0 auto;">
         <canvas id="weeklyChart"></canvas>
     </div>
 
+
     <!-- Form -->
     <div style="max-width: 800px; margin: 20px auto;">
-        <form method="get" action="{% url 'weekly_chart' %}">
-            <!-- 연도 선택 -->
-            <label for="year">연도:</label>
-            <select name="year" id="year">
+        <form method="get" action="{% url 'weekly_chart' %}" id="filterForm">
+            <!-- 시작 연도/월 -->
+            <label>시작 연도:</label>
+            <select name="start_year" id="start_year">
                 {% for y in year_list %}
-                    <option value="{{ y }}" {% if year == y %}selected{% endif %}>
-                        {{ y }}
-                    </option>
+                    <option value="{{ y }}" {% if start_year == y %}selected{% endif %}>{{ y }}</option>
+                {% endfor %}
+            </select>
+            <label>시작 월:</label>
+            <select name="start_month" id="start_month">
+                {% for m in month_list %}
+                    <option value="{{ m }}" {% if start_month == m %}selected{% endif %}>{{ m }}월</option>
                 {% endfor %}
             </select>
 
-            <!-- 월 선택 -->
-            <label for="month">월:</label>
-            <select name="month" id="month">
+            <!-- 끝 연도/월 -->
+            <label>끝 연도:</label>
+            <select name="end_year" id="end_year">
+                {% for y in year_list %}
+                    <option value="{{ y }}" {% if end_year == y %}selected{% endif %}>{{ y }}</option>
+                {% endfor %}
+            </select>
+            <label>끝 월:</label>
+            <select name="end_month" id="end_month">
                 {% for m in month_list %}
-                    <option value="{{ m }}" {% if month == m %}selected{% endif %}>
-                        {{ m }}월
-                    </option>
+                    <option value="{{ m }}" {% if end_month == m %}selected{% endif %}>{{ m }}월</option>
                 {% endfor %}
             </select>
 
             <!-- 최대 순위 -->
-            <label for="max_rank">최대 순위:</label>
-            <input type="number" name="max_rank" id="max_rank" value="{{ max_rank }}" min="1" max="100">
+            <label>최대 순위:</label>
+            <input type="number" name="max_rank" id="max_rank" value="{{ max_rank }}" min="1" max="30">
 
             <button type="submit">조회</button>
         </form>
+
+        <!-- 전체 그래프 토글용 -->
+        <div style="max-width: 800px; margin: 10px auto;">
+            <button type="button" id="toggleAllBtn">전체 그래프 토글</button>
+        </div>
+
     </div>
 
     <!-- CSS -->
