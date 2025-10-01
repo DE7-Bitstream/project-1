@@ -15,3 +15,68 @@ canvas {
 .weekly-comment li{
     margin-bottom: 10px;
 }
+
+/* */
+.form-area {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px 30px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: left;  /* 좌측 정렬 */
+}
+
+.form-area label {
+    font-weight: bold;
+    margin-right: 8px;
+    color: #333;
+}
+
+.form-area select,
+.form-area input[type="number"] {
+    margin: 5px 15px 15px 0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    background-color: #fefefe;
+    transition: border-color 0.2s ease;
+}
+
+.form-area input[type="number"]:focus {
+    border-color: #009688;
+    outline: none;
+}
+
+.form-area button[type="submit"] {
+    display: inline-block;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #009688;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.form-area button[type="submit"]:hover {
+    background-color: #00695c;
+}
+
+#toggleAllBtn {
+    padding: 8px 16px;
+    border: 1px solid #009688;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #009688;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+#toggleAllBtn:hover {
+    background-color: #009688;
+    color: #fff;
+}
