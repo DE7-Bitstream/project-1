@@ -6,9 +6,22 @@
     <div class="melon-chart">
         <h3>{{ start_year }}년 {{ start_month }}월 ~ {{ end_year }}년 {{ end_month }}월 (Top {{ max_rank }})</h3>
 
-        <!-- 캔버스 -->
-        <div class="chart-container" style="margin: 0 auto;">
-            <canvas id="weeklyChart"></canvas>
+
+
+
+        <div class="chart-wrapper" style="display:flex; gap:20px; justify-content:center; align-items:flex-start;">
+            <!-- 캔버스 -->
+            <div class="chart-container" style="flex:1;">
+                <canvas id="weeklyChart"></canvas>
+            </div>
+
+            <!-- 가수 체크박스 리스트 -->
+            <div class="artist-filter" style="flex:0 0 200px; padding:10px; border:1px solid #ddd; border-radius:8px; background:#f9f9f9;">
+                <h4>가수 필터</h4>
+                <div id="artistCheckboxes">
+                    <!-- JS에서 체크박스 채워짐 -->
+                </div>
+            </div>
         </div>
 
 
