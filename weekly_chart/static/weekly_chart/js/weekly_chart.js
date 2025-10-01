@@ -93,7 +93,11 @@ function renderWeeklyChart(songData, canvasId) {
     setDynamicChartHeight(canvasId, maxRank);
 
     const colors = generateDistinctColors(totalSongs);
-    const datasets = createDatasets(songData, xLabels, colors);
+    const datasets = createDatasets(songData, xLabels, colors).map(ds => ({
+            ...ds,
+        hoverBorderWidth: 4,  // 마우스 오버 시 선 굵기
+        hoverRadius: 7,         // 마우스 오버 시 점 크기
+    }));
 
     const ctx = document.getElementById(canvasId).getContext('2d');
 
@@ -135,15 +139,37 @@ function renderWeeklyChart(songData, canvasId) {
                         const meta = legend.chart.getDatasetMeta(index);
                         meta.hidden = !meta.hidden; // meta.hidden 기준으로 토글
                         legend.chart.update();
-                    }
+                    },
+                    onHover: (event, legendItem, legend) => {
+                        // 범례에 마우스를 올릴 때
+                        const datasetIndex = legendItem.datasetIndex;
+                        const dataset = legend.chart.data.datasets[datasetIndex];
+
+                        // 꺾은선과 점의 스타일 변경
+                        dataset.borderWidth = 4; 
+                        dataset.pointRadius = 7; 
+                        legend.chart.update();
+                    },
+                    onLeave: (event, legendItem, legend) => {
+                        // 범례에서 마우스를 뗄 때
+                        const datasetIndex = legendItem.datasetIndex;
+                        const dataset = legend.chart.data.datasets[datasetIndex];
+
+                        // 꺾은선과 점의 스타일 원래대로 복원
+                        dataset.borderWidth = 2;
+                        dataset.pointRadius = 5;
+                        legend.chart.update();
+                    },
                 },
                 tooltip: {
+                    mode: 'nearest',
+                    intersect: true,
                     callbacks: {
                         label: context => `${context.dataset.label} - ${context.dataset.artist} | 순위: ${context.raw ?? '순위 없음'}`
                     }
                 }
             },
-            interaction: { mode: 'nearest', intersect: true },
+            interaction: { mode: 'dataset', intersect: true },
         }
     });
     // 포인트 클릭
