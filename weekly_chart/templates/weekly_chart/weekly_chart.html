@@ -2,25 +2,50 @@
 {% load static %}
 
 {% block content %}
-
     <h2>이건 weekly_chart 페이지입니다</h2>
-    <a href="{% url 'weekly_chart' %}">나에게</a>
-    <h1>2020-1</h1>
+
+    <h1>{{ year }}년 {{ month }}월 (Top {{ max_rank }})</h1>
 
     <!-- 캔버스 -->
     <div class="chart-container" style="height: 400px; max-width: 800px; margin: 0 auto;">
         <canvas id="weeklyChart"></canvas>
     </div>
 
+    <!-- Form -->
+    <div style="max-width: 800px; margin: 20px auto;">
+        <form method="get" action="{% url 'weekly_chart' %}">
+            <!-- 연도 선택 -->
+            <label for="year">연도:</label>
+            <select name="year" id="year">
+                {% for y in year_list %}
+                    <option value="{{ y }}" {% if year == y %}selected{% endif %}>
+                        {{ y }}
+                    </option>
+                {% endfor %}
+            </select>
 
+            <!-- 월 선택 -->
+            <label for="month">월:</label>
+            <select name="month" id="month">
+                {% for m in month_list %}
+                    <option value="{{ m }}" {% if month == m %}selected{% endif %}>
+                        {{ m }}월
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- 최대 순위 -->
+            <label for="max_rank">최대 순위:</label>
+            <input type="number" name="max_rank" id="max_rank" value="{{ max_rank }}" min="1" max="100">
+
+            <button type="submit">조회</button>
+        </form>
+    </div>
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'weekly_chart/css/style.css' %}">
 
-
     <!-- js -->
-
-    <!-- 데이터 변환 -->
     {{ song_data|json_script:"song-data" }}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{% static 'weekly_chart/js/weekly_chart.js' %}"></script>
