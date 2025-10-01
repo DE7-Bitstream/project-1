@@ -1,5 +1,6 @@
 // 입력 검증
 document.getElementById('filterForm').addEventListener('submit', function(e){
+    ////////////////////
     const MAX_MONTHS = 12;
     const MAX_RANK = 30;
     ////////////////////
@@ -94,7 +95,7 @@ function renderWeeklyChart(songData, canvasId) {
 
     const colors = generateDistinctColors(totalSongs);
     const datasets = createDatasets(songData, xLabels, colors).map(ds => ({
-            ...ds,
+        ...ds,
         hoverBorderWidth: 4,  // 마우스 오버 시 선 굵기
         hoverRadius: 7,         // 마우스 오버 시 점 크기
     }));
@@ -112,7 +113,7 @@ function renderWeeklyChart(songData, canvasId) {
                 x: { title: { display: true, text: '주차' } }
             },
             plugins: {
-                title: { display: true, text: '주간 차트 순위 변화' },
+                title: { display: true, text: '주간 차트 순위 변화 *melon 차트 기준' },
                 legend: {
                     position: 'top',
                     labels: {
@@ -172,7 +173,8 @@ function renderWeeklyChart(songData, canvasId) {
             interaction: { mode: 'dataset', intersect: true },
         }
     });
-    // 포인트 클릭
+
+    // 포인트 클릭 -> 사라지기
     ctx.canvas.addEventListener('click', (event) => {
         const points = chart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
         if (points.length) {

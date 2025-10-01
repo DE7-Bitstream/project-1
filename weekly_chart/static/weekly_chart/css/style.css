@@ -7,3 +7,11 @@ canvas {
     border: 1px solid #ddd;
     border-radius: 8px;
 }
+
+.melon-chart {
+    text-align: center;
+}
+
+.weekly-comment li{
+    margin-bottom: 10px;
+}
