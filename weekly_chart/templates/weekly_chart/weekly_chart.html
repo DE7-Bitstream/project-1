@@ -1,7 +1,27 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block content %}
-  <h2>이건 weekly_chart 페이지입니다</h2>
-  <p>파이팅.</p>
-  <a href="{% url 'weekly_chart' %}">나에게</a>
+
+    <h2>이건 weekly_chart 페이지입니다</h2>
+    <a href="{% url 'weekly_chart' %}">나에게</a>
+    <h1>2020-1</h1>
+
+    <!-- 캔버스 -->
+    <div class="chart-container" style="height: 400px; max-width: 800px; margin: 0 auto;">
+        <canvas id="weeklyChart"></canvas>
+    </div>
+
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'weekly_chart/css/style.css' %}">
+
+
+    <!-- js -->
+
+    <!-- 데이터 변환 -->
+    {{ song_data|json_script:"song-data" }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'weekly_chart/js/weekly_chart.js' %}"></script>
 {% endblock %}
