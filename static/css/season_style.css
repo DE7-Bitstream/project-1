@@ -1,0 +1,15 @@
+h3 {
+    text-align : center;
+    font-size : 2rem;
+    margin-left : 45px;
+}
+
+.list_wrapper {
+    display : flex;
+    justify-content : center;
+    text-align : center;
+}
+
+.season_list {
+    padding : 20px;
+}
