@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/season_style.css' %}">
+
+
+
+<h3>다른 계절 보기</h3>
+<div class = 'list_wrapper'>
+    <dl class = 'season_list'>
+        <dd>
+            <a class = 'season_image' href = '{% url "season:season_spring" %}'>
+                <img src = 'https://placehold.co/150x150'>
+            </a>
+        </dd>
+        <dd>
+            <span class = 'season_name'>봄</span>
+        </dd>
+    </dl>
+    <dl class = 'season_list'>
+        <dd>
+            <a class = 'season_image' href = '{% url "season:season_fall" %}'>
+                <img src = 'https://placehold.co/150x150'>
+            </a>
+        </dd>
+        <dd>
+            <span class = 'season_name'>가을</span>
+        </dd>
+    </dl>
+    <dl class = 'season_list'>
+        <dd>
+            <a class = 'season_image' href = '{% url "season:season_winter" %}'>
+                <img src = 'https://placehold.co/150x150'>
+            </a>
+        </dd>
+        <dd>
+            <span class = 'season_name'>겨울</span>
+        </dd>
+    </dl>
+</div>
+{% endblock %}

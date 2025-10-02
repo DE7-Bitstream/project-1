@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/season_index_style.css' %}">
+<h2>계절별 유행 분석</h2>
+<div class = 'list_wrapper'>
+    <dl class = 'season_list'>
+        <dd>
+            <a class = 'season_image' href = '{% url "season:season_spring" %}'>
+                <img src = 'https://placehold.co/250x250'>
+            </a>
+        </dd>
+        <dd>
+            <span class = 'season_name'>봄</span>
+        </dd>
+    </dl>
+    <dl class = 'season_list'>
+        <dd>
+            <a class = 'season_image' href = '{% url "season:season_summer" %}'>
+                <img src = 'https://placehold.co/250x250'>
+            </a>
+        </dd>
+        <dd>
+            <span class = 'season_name'>여름</span>
+        </dd>
+    </dl>
+    <dl class = 'season_list'>
+        <dd>
+            <a class = 'season_image' href = '{% url "season:season_fall" %}'>
+                <img src = 'https://placehold.co/250x250'>
+            </a>
+        </dd>
+        <dd>
+            <span class = 'season_name'>가을</span>
+        </dd>
+    </dl>
+    <dl class = 'season_list'>
+        <dd>
+            <a class = 'season_image' href = '{% url "season:season_winter" %}'>
+                <img src = 'https://placehold.co/250x250'>
+            </a>
+        </dd>
+        <dd>
+            <span class = 'season_name'>겨울</span>
+        </dd>
+    </dl>
+</div>
+{% endblock %}
