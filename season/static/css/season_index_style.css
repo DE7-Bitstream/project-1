@@ -1,0 +1,14 @@
+h2 {
+    text-align : center;
+    font-size : 2.5rem;
+}
+
+.list_wrapper {
+    display : flex;
+    justify-content : center;
+    text-align : center;
+}
+
+.season_list {
+    padding : 20px;
+}
