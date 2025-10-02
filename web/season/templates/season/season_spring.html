@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/season_style.css' %}">
+<link rel="stylesheet" href="{% static 'season/css/season_style.css' %}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <h3>최근 5년간 TOP100 차트에 가장 많이 들어온 노래 TOP5</h3>
@@ -21,11 +21,11 @@
                 label: '차트 진입 횟수',
                 data: data,
                 backgroundColor : [
-                    'rgba(255, 255, 153, 0.7)',
-                    'rgba(152, 255, 152, 0.7)',
-                    'rgba(173, 216, 230, 0.7)',
-                    'rgba(221, 160, 221, 0.7)',
-                    'rgba(255, 192, 203, 0.7)',
+                    'rgba(255, 255, 153, 0.75)',
+                    'rgba(152, 255, 152, 0.75)',
+                    'rgba(173, 216, 230, 0.75)',
+                    'rgba(221, 160, 221, 0.75)',
+                    'rgba(255, 192, 203, 0.75)',
                 ]
             }]
         },
