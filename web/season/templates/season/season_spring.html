@@ -2,72 +2,58 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'season/css/season_style.css' %}">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'season/css/season_style.css' %}">
 
-<h3>최근 5년간 TOP100 차트에 가장 많이 들어온 노래 TOP5</h3>
-<div class = "top5_chart" style= "width: 1200px; height: 600px; margin: 0 auto;" >
-    <canvas id = "top5Chart"></canvas>
-</div>
-<script>
-    const labels = {{ top5_song_name|safe }};
-    const data = {{ top5_song_count|safe }};
-    const ctx = document.getElementById('top5Chart').getContext('2d');
-    const top5Chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: '차트 진입 횟수',
-                data: data,
-                backgroundColor : [
-                    'rgba(255, 255, 153, 0.75)',
-                    'rgba(152, 255, 152, 0.75)',
-                    'rgba(173, 216, 230, 0.75)',
-                    'rgba(221, 160, 221, 0.75)',
-                    'rgba(255, 192, 203, 0.75)',
-                ]
-            }]
-        },
-        options: {
-            scales: {
-                y: { beginAtZero: true }
-            }
-        }
-    });
-</script>
+    <h3>최근 5년간 TOP100 차트에 가장 많이 들어온 노래 TOP5</h3>
+    <div class = 'main_chart_row'>
+        <div class = "main_chart" style= "width: 900px; height: 600px;" >
+            <canvas id = "top5BarChart"></canvas>
+        </div>
+        <div class = "main_chart" style= "width: 900px; height: 600px;" >
+            <canvas id = "top5LineChart"></canvas>
+        </div>
+    </div>
 
-<h3>다른 계절 보기</h3>
-<div class = 'list_wrapper'>
-    <dl class = 'season_list'>
-        <dd>
-            <a class = 'season_image' href = '{% url "season:season_summer" %}'>
-                <img src = 'https://placehold.co/150x150'>
-            </a>
-        </dd>
-        <dd>
-            <span class = 'season_name'>여름</span>
-        </dd>
-    </dl>
-    <dl class = 'season_list'>
-        <dd>
-            <a class = 'season_image' href = '{% url "season:season_fall" %}'>
-                <img src = 'https://placehold.co/150x150'>
-            </a>
-        </dd>
-        <dd>
-            <span class = 'season_name'>가을</span>
-        </dd>
-    </dl>
-    <dl class = 'season_list'>
-        <dd>
-            <a class = 'season_image' href = '{% url "season:season_winter" %}'>
-                <img src = 'https://placehold.co/150x150'>
-            </a>
-        </dd>
-        <dd>
-            <span class = 'season_name'>겨울</span>
-        </dd>
-    </dl>
-</div>
+    <h3>다른 계절 보기</h3>
+    <div class = 'list_wrapper'>
+        <dl class = 'season_list'>
+            <dd>
+                <a class = 'season_image' href = '{% url "season:season_summer" %}'>
+                    <img src = 'https://placehold.co/150x150'>
+                </a>
+            </dd>
+            <dd>
+                <span class = 'season_name'>여름</span>
+            </dd>
+        </dl>
+        <dl class = 'season_list'>
+            <dd>
+                <a class = 'season_image' href = '{% url "season:season_fall" %}'>
+                    <img src = 'https://placehold.co/150x150'>
+                </a>
+            </dd>
+            <dd>
+                <span class = 'season_name'>가을</span>
+            </dd>
+        </dl>
+        <dl class = 'season_list'>
+            <dd>
+                <a class = 'season_image' href = '{% url "season:season_winter" %}'>
+                    <img src = 'https://placehold.co/150x150'>
+                </a>
+            </dd>
+            <dd>
+                <span class = 'season_name'>겨울</span>
+            </dd>
+        </dl>
+    </div>
+    {{ top5_rank_labels }}
+    {{ top5_rank }}
+
+    {{ top5_song_name|json_script:"top5SongName" }} 
+    {{ top5_chart_in_count|json_script:"top5ChartInCount" }}
+    {{ top5_rank_labels|json_script:"top5RankLabels" }}
+    {{ top5_rank|json_script:"top5Rank" }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src = "{% static 'season/js/main_chart.js' %}"></script>
 {% endblock %}

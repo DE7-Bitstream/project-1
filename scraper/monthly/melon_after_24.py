@@ -77,9 +77,12 @@ driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
 URL = 'https://www.melon.com/chart/month/index.htm'
 driver.get(URL)
 
-titles, singers, albums, genres = scraping_all(driver, 2025, 2)
-make_df(titles, singers, albums, genres, 2025, 3)
+# 2025
+for i in range(8):
+    titles, singers, albums, genres = scraping_all(driver, 2025, i)
+    make_df(titles, singers, albums, genres, 2025, i + 1)
 
-#for i in range(12):
-#    titles, singers, albums, genres = scraping_all(driver, 2024, i)
-#    make_df(titles, singers, albums, genres)
+# 2024
+for i in range(12):
+    titles, singers, albums, genres = scraping_all(driver, 2024, i)
+    make_df(titles, singers, albums, genres, 2024, i + 1)
