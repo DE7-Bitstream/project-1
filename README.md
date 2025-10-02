@@ -1,5 +1,27 @@
 # web-service
+```python
+repo
+|- dataframes
+|    |- < 기능별 이름 ex. weekly_chart ... >
+|        | csv파일들 ...
+|- bitstream
+|- < 기능별 이름  >
+|     |- static
+|        |- < 기능별 이름 >
+|            |- css
+|                | css 파일
+|            |- js
+|                | js 파일
+|     |- templates
+|        |- < 기능별 이름 >
+|            | html 파일
+| README.md
+| manage.py
+| ...
 
+```
+
+-------
 만드신 각 app의 html에서, 아래 코드를 이용하면 레이아웃 사용할 수 있습니다.  
 
 
