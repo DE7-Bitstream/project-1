@@ -3,7 +3,7 @@ import os
 from django.core.management.base import BaseCommand, CommandError
 from weekly_chart.models import WeeklyChart
 
-BASE_CSV_PATH = os.path.join('data', 'weekly')
+BASE_CSV_PATH = os.path.join('dataframes', 'weekly_chart')
 MELON_FUNC = lambda year : f'melon_chart_weekly_{year}.csv'
 YEARS = [ 2020, 2021, 2022, 2023, 2024, 2025 ]
 #####################
@@ -11,22 +11,12 @@ YEARS = [ 2020, 2021, 2022, 2023, 2024, 2025 ]
 class Command(BaseCommand):
     help = 'weekly_chart 데이터 로드'
 
-    def add_arguments(self, parser):
-        # 기존 데이터 삭제 여부
-        parser.add_argument(
-            '--clear',        
-            action='store_true',
-            help='저장 전 기존 데이터 삭제, 기본적으로 False입니다.',
-        )
-    
     def handle(self, *args, **options):    
-        should_clear = options['clear']
 
         try:
-            if should_clear:
-                self.stdout.write(self.style.WARNING('Clearing existing WeeklyChart data...'))
-                WeeklyChart.objects.all().delete()
-                self.stdout.write(self.style.WARNING('Data cleared.'))
+            self.stdout.write(self.style.WARNING('Clearing existing WeeklyChart data...'))
+            WeeklyChart.objects.all().delete()
+            self.stdout.write(self.style.WARNING('Data cleared.'))
   
 
             for year in YEARS:
