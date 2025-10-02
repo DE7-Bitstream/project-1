@@ -20,6 +20,13 @@ repo
 | ...
 
 ```
+-------
+## 데이터 load 방법
+
+- weekly 데이터
+```python
+python manage.py load_weekly_chart
+```
 
 -------
 만드신 각 app의 html에서, 아래 코드를 이용하면 레이아웃 사용할 수 있습니다.  
