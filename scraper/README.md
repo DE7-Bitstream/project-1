@@ -1,1 +1,11 @@
-scraper 폴더 구조 등 컨벤션 정하기 ~
+```python
+| README.md
+
+|- <기능 폴더 이름 ex. genre, yearly, monthly … >
+
+|    |- csv
+
+|        | 결과 파일들 …
+
+|    | python 파일들 …
+```
