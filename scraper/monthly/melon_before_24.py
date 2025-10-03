@@ -148,15 +148,7 @@ ActionChains(driver).click(button).perform()
 button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'decade_1')))
 driver.execute_script('arguments[0].click()', button)
 
-#scraping(driver, 2023)
-#scraping(driver, 2022)
-#scraping(driver, 2021)
-#scraping(driver, 2020)
-
-titles_1, singers_1, albums_1, genres_1 = scraping_all(driver, 2023, 1, TOP_50)
-titles_2, singers_2, albums_2, genres_2 = scraping_all(driver, 2023, 1, TOP_100)
-titles = titles_1 + titles_2
-singers = singers_1 + singers_2
-albums = albums_1 + albums_2
-genres = genres_1 + genres_2
-make_df(titles, singers, albums, genres, 2023, 1)
+scraping(driver, 2023)
+scraping(driver, 2022)
+scraping(driver, 2021)
+scraping(driver, 2020)
