@@ -13,9 +13,11 @@ class SpringView(generic.TemplateView):
         context = super().get_context_data(**kwargs)
 
         # 여기에 차트 데이터 추가
-        top5_song_name, top5_song_count = get_main_chart('spring')
+        top5_song_name, top5_chart_in_count, top5_rank_labels, top5_rank = get_main_chart('spring')
         context['top5_song_name'] = top5_song_name
-        context['top5_song_count'] = top5_song_count
+        context['top5_chart_in_count'] = top5_chart_in_count
+        context['top5_rank_labels'] = top5_rank_labels
+        context['top5_rank'] = top5_rank
         return context
     
 class SummerView(generic.TemplateView):
