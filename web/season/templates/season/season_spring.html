@@ -3,8 +3,39 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'season/css/season_style.css' %}">
+    <section class = 'section'>
+        <article class = 'section_left'>
+            <div class = 'section_title'>최근 5년간 봄 차트에 가장 많이 등장하는 장르 TOP 5</div>
+            <div class = 'section_content'>
+                <canvas id = "top5GenrePie"></canvas>
+            </div>
+        </article>
 
-    <h3>최근 5년간 TOP100 차트에 가장 많이 들어온 노래 TOP5</h3>
+        <article class = 'section_right'>
+            <div class = 'section_title'>각 장르별 오래 사랑받았던 노래 TOP 3</div>
+            <div class = 'section_content'>
+                <div class="top3_song">
+                    <div class="top_song">
+                        <div class="rank">1</div>
+                        <img src="https://placehold.co/150x150" alt = "노래1">
+                        <div class="song_name">노래 제목 1</div>
+                    </div>
+                    <div class="top_song">
+                        <div class="rank">2</div>
+                        <img src="https://placehold.co/150x150" alt = "노래2">
+                        <div class="song_name">노래 제목 2</div>
+                    </div>
+                    <div class="top_song">
+                        <div class="rank">3</div>
+                        <img src="https://placehold.co/150x150" alt = "노래3">
+                        <div class="song_name">노래 제목 3</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <div id = 'section_2nd' class = section_title>애매하다 애매해</div>
     <div class = 'main_chart_row'>
         <div class = "main_chart" style= "width: 900px; height: 600px;" >
             <canvas id = "top5BarChart"></canvas>
@@ -14,7 +45,7 @@
         </div>
     </div>
 
-    <h3>다른 계절 보기</h3>
+    <div class = section_title>다른 계절 보기</div>
     <div class = 'list_wrapper'>
         <dl class = 'season_list'>
             <dd>
@@ -47,13 +78,14 @@
             </dd>
         </dl>
     </div>
-    {{ top5_rank_labels }}
-    {{ top5_rank }}
-
     {{ top5_song_name|json_script:"top5SongName" }} 
     {{ top5_chart_in_count|json_script:"top5ChartInCount" }}
     {{ top5_rank_labels|json_script:"top5RankLabels" }}
     {{ top5_rank|json_script:"top5Rank" }}
+
+    {{ top5_genre|json_script:"top5Genre" }}
+    {{ top5_genre_count|json_script:"top5GenreCount" }}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src = "{% static 'season/js/pie_chart.js' %}"></script>
     <script src = "{% static 'season/js/main_chart.js' %}"></script>
 {% endblock %}
