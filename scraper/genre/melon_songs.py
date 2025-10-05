@@ -50,13 +50,13 @@ def scrape_genre_steady(genre_name: str, gnr_code: str, steady: bool = True):
     멜론 장르 스테디셀러에서 제목/가수 + songId + albumId 추출 (안정화 버전)
     """
     steady_flag = "Y" if steady else "N"
-    max_pages = 4
+    max_pages = 5
     results = []
 
     for page in range(1, max_pages + 1):
         url = f"https://www.melon.com/genre/song_list.htm?gnrCode={gnr_code}&steadyYn={steady_flag}&page={page}"
         driver.get(url)
-
+    
         # 컨테이너 로딩 대기
         try:
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.service_list_song")))
