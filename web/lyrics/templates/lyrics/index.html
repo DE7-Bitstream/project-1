@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🎵 멜론 장르별 가사 분석</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            padding: 40px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            background: rgba(255,255,255,0.1); 
+            padding: 40px; 
+            border-radius: 20px; 
+            backdrop-filter: blur(10px);
+        }
+        h1 { 
+            text-align: center; 
+            font-size: 3em; 
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .genre-card {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .genre-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            color: white;
+        }
+        .genre-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .genre-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .genre-desc {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 멜론 장르별 가사 분석</h1>
+        <p class="subtitle">각 장르의 가사에서 자주 사용되는 단어들을 워드클라우드로 확인해보세요</p>
+        
+        <div class="stats">
+            <h3>📊 분석 현황</h3>
+            <p>총 {{ total_songs|default:"0" }}곡 분석 완료 | {{ total_words|default:"0" }}개 단어 추출</p>
+        </div>
+
+        <div class="genre-grid">
+            <a href="{% url 'wordcloud' %}?genre=발라드" class="genre-card">
+                <span class="genre-icon">💙</span>
+                <div class="genre-name">발라드</div>
+                <div class="genre-desc">감성적이고 서정적인 가사</div>
+            </a>
+
+            <a href="{% url 'wordcloud' %}?genre=댄스" class="genre-card">
+                <span class="genre-icon">💃</span>
+                <div class="genre-name">댄스</div>
+                <div class="genre-desc">에너지 넘치는 리듬감</div>
+            </a>
+
+            <a href="{% url 'wordcloud' %}?genre=힙합" class="genre-card">
+                <span class="genre-icon">🎤</span>
+                <div class="genre-name">힙합</div>
+                <div class="genre-desc">자유롭고 강렬한 표현</div>
+            </a>
+
+            <a href="{% url 'wordcloud' %}?genre=록" class="genre-card">
+                <span class="genre-icon">🤘</span>
+                <div class="genre-name">록</div>
+                <div class="genre-desc">파워풀하고 역동적</div>
+            </a>
+
+            <a href="{% url 'wordcloud' %}?genre=인디" class="genre-card">
+                <span class="genre-icon">🎸</span>
+                <div class="genre-name">인디</div>
+                <div class="genre-desc">독창적이고 개성있는</div>
+            </a>
+
+            <a href="{% url 'wordcloud' %}?genre=트로트" class="genre-card">
+                <span class="genre-icon">🎺</span>
+                <div class="genre-name">트로트</div>
+                <div class="genre-desc">한국 전통의 정서</div>
+            </a>
+
+            <a href="{% url 'wordcloud' %}?genre=전체" class="genre-card">
+                <span class="genre-icon">🌟</span>
+                <div class="genre-name">전체 장르</div>
+                <div class="genre-desc">모든 장르 종합 분석</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ genre }} 워드클라우드 - 멜론 가사 분석</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+            text-decoration: none;
+            color: white;
+        }
+        .genre-title {
+            font-size: 3em;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .wordcloud-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .word-item {
+            display: inline-block;
+            margin: 8px;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .word-item:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+        }
+        .error {
+            color: #ff6b6b;
+            background: rgba(255,107,107,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .word-size-1 { font-size: 2.5em; }
+        .word-size-2 { font-size: 2.2em; }
+        .word-size-3 { font-size: 1.9em; }
+        .word-size-4 { font-size: 1.6em; }
+        .word-size-5 { font-size: 1.3em; }
+        .word-size-6 { font-size: 1.1em; }
+        .word-count {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'lyrics_index' %}" class="back-button">← 장르 선택으로 돌아가기</a>
+        
+        <div class="header">
+            <h1 class="genre-title">{{ genre }} 워드클라우드</h1>
+        </div>
+        
+        {% if error %}
+            <div class="error">
+                <h3>⚠️ 오류 발생</h3>
+                <p>{{ error }}</p>
+                <p>가사 분석을 먼저 실행해주세요.</p>
+            </div>
+        {% else %}
+            <div class="stats">
+                <h3>📊 분석 정보</h3>
+                <p><strong>분석된 곡 수:</strong> {{ total_songs }}곡</p>
+                <p><strong>추출된 단어 수:</strong> {{ total_words }}개</p>
+                <p><strong>상위 빈도 단어:</strong> {{ word_data|length }}개 표시</p>
+            </div>
+
+            <div class="wordcloud-container">
+                {% if word_data %}
+                    {% for word in word_data %}
+                        {% if forloop.counter <= 5 %}
+                            <span class="word-item word-size-1">
+                                {{ word.word }}
+                                <span class="word-count">({{ word.count }})</span>
+                            </span>
+                        {% elif forloop.counter <= 10 %}
+                            <span class="word-item word-size-2">
+                                {{ word.word }}
+                                <span class="word-count">({{ word.count }})</span>
+                            </span>
+                        {% elif forloop.counter <= 15 %}
+                            <span class="word-item word-size-3">
+                                {{ word.word }}
+                                <span class="word-count">({{ word.count }})</span>
+                            </span>
+                        {% elif forloop.counter <= 20 %}
+                            <span class="word-item word-size-4">
+                                {{ word.word }}
+                                <span class="word-count">({{ word.count }})</span>
+                            </span>
+                        {% elif forloop.counter <= 25 %}
+                            <span class="word-item word-size-5">
+                                {{ word.word }}
+                                <span class="word-count">({{ word.count }})</span>
+                            </span>
+                        {% else %}
+                            <span class="word-item word-size-6">
+                                {{ word.word }}
+                                <span class="word-count">({{ word.count }})</span>
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p style="font-size: 1.5em; opacity: 0.7;">분석할 데이터가 없습니다.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
