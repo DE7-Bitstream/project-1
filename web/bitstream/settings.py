@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'weekly_chart',
     'hitmakers',
+    'lyrics',
 ]
 
 MIDDLEWARE = [
