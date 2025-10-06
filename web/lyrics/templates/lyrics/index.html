@@ -1,114 +1,100 @@
-<!-- 파일경로: web/lyrics/templates/lyrics/index.html -->
-{% extends 'base.html' %}
-
-{% block title %}멜론 장르별 가사 분석{% endblock %}
-
-{% block extra_css %}
-<style>
-    .genre-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-        margin-top: 30px;
-    }
-    
-    .genre-card {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        border-radius: 15px;
-        padding: 30px 20px;
-        text-align: center;
-        text-decoration: none;
-        color: #333;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .genre-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
-        border-color: #667eea;
-        text-decoration: none;
-        color: #333;
-    }
-    
-    .genre-icon {
-        font-size: 3.5em;
-        margin-bottom: 15px;
-        display: block;
-    }
-    
-    .genre-name {
-        font-size: 1.6em;
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: #667eea;
-    }
-    
-    .genre-desc {
-        font-size: 1em;
-        opacity: 0.7;
-        line-height: 1.4;
-    }
-    
-    .stats-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 25px;
-        border-radius: 15px;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-</style>
-{% endblock %}
+{% extends "layout.html" %}
+{% load static %}
 
 {% block content %}
-<div class="stats-box">
-    <h3>📊 분석 현황</h3>
-    <p>총 {{ total_songs|default:"0" }}곡 분석 완료 | {{ total_words|default:"0" }}개 단어 추출</p>
+<!-- 전체 워드클라우드 -->
+<div class="main-wordcloud">
+    <h2>🎵 전체 장르 워드클라우드</h2>
+    <p>멜론 차트 전체 장르의 가사에서 가장 자주 사용되는 단어들</p>
+    <img src="{% static 'lyrics/images/wordcloud.png' %}" alt="전체 워드클라우드">
 </div>
 
-<div class="genre-grid">
-    <a href="{% url 'wordcloud' %}?genre=발라드" class="genre-card">
-        <span class="genre-icon">💙</span>
-        <div class="genre-name">발라드</div>
-        <div class="genre-desc">감성적이고 서정적인 가사</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=댄스" class="genre-card">
-        <span class="genre-icon">💃</span>
-        <div class="genre-name">댄스</div>
-        <div class="genre-desc">에너지 넘치는 리듬감</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=힙합" class="genre-card">
-        <span class="genre-icon">🎤</span>
-        <div class="genre-name">힙합</div>
-        <div class="genre-desc">자유롭고 강렬한 표현</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=록" class="genre-card">
-        <span class="genre-icon">🤘</span>
-        <div class="genre-name">록</div>
-        <div class="genre-desc">파워풀하고 역동적</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=인디" class="genre-card">
-        <span class="genre-icon">🎸</span>
-        <div class="genre-name">인디</div>
-        <div class="genre-desc">독창적이고 개성있는</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=트로트" class="genre-card">
-        <span class="genre-icon">🎺</span>
-        <div class="genre-name">트로트</div>
-        <div class="genre-desc">한국 전통의 정서</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=전체" class="genre-card">
-        <span class="genre-icon">🌟</span>
-        <div class="genre-name">전체 장르</div>
-        <div class="genre-desc">모든 장르 종합 분석</div>
-    </a>
+<!-- 장르별 워드클라우드 -->
+<div class="wordcloud-grid">
+    <div class="wordcloud-item">
+        <h3>발라드</h3>
+        <img src="{% static 'lyrics/images/wordcloud_발라드.png' %}" alt="발라드 워드클라우드">
+    </div>
+    
+    <div class="wordcloud-item">
+        <h3>댄스</h3>
+        <img src="{% static 'lyrics/images/wordcloud_댄스.png' %}" alt="댄스 워드클라우드">
+    </div>
+    
+    <div class="wordcloud-item">
+        <h3>랩/힙합</h3>
+        <img src="{% static 'lyrics/images/wordcloud_랩_힙합.png' %}" alt="랩/힙합 워드클라우드">
+    </div>
+    
+    <div class="wordcloud-item">
+        <h3>록/메탈</h3>
+        <img src="{% static 'lyrics/images/wordcloud_록_메탈.png' %}" alt="록/메탈 워드클라우드">
+    </div>
 </div>
+
+<div class="info-box">
+    <p><strong>📊 분석 정보:</strong> 멜론 차트 상위곡 가사에서 추출한 실제 데이터</p>
+    <p><strong>🔤 언어 처리:</strong> KoNLPy를 사용한 한국어 형태소 분석</p>
+</div>
+
+<style>
+.wordcloud-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.wordcloud-item {
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.wordcloud-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.wordcloud-item h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.wordcloud-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
+}
+
+.main-wordcloud {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px;
+}
+
+.main-wordcloud img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.info-box {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+</style>
 {% endblock %}
