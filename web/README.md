@@ -28,7 +28,18 @@ repo
 python manage.py load_weekly_chart
 ```
 
+- hitmakers 데이터
+
+```python
+# 1) 모델 생성
+python manage.py migrate hitmakers
+
+# 2) 데이터 로드
+python manage.py load_hitmakers_data
+```
+
 -------
+## 공통 레이아웃 적용 방법
 만드신 각 app의 html에서, 아래 코드를 이용하면 레이아웃 사용할 수 있습니다.  
 
 
