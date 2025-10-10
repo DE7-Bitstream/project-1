@@ -1,63 +1,41 @@
-from django.conf import settings
+from django.db import models
 
-import os
-import pandas as pd
-import numpy as np
+from season.models import GenreCount, TopSongs, SongImage
 
-TOP3_SONGS_IN_GENRE = os.path.join(settings.SEASON_DATAFRAME_DIR, 'all_season_top3_songs_in_genre.csv')
-TOP5_GENRE = os.path.join(settings.SEASON_DATAFRAME_DIR, 'all_season_top5_genre_count.csv')
-
-COLORS = [
-    'rgba(255, 205, 86, 0.5)',
-    'rgba(75, 192, 192, 0.5)',
-    'rgba(54, 162, 235, 0.5)',
-    'rgba(153, 102, 255, 0.5)',
-    'rgba(255, 99, 132, 0.5)',
-]
-
-def select_season(df, season):
-    if '장르' in df:
-        df['장르'] = df['장르'].apply(lambda x : '국내드라마' if '드라마' in x else x)
-
-    if season == 'spring':
-        df = df[df['계절'] == '봄']
-    elif season == 'summer':
-        df = df[df['계절'] == '여름']
-    elif season == 'fall':
-        df = df[df['계절'] == '가을']
-    else:
-        df = df[df['계절'] == '겨울']
-
-    return df
+def select_season(queryset, season):
+    season_map = {
+        'spring': '봄',
+        'summer': '여름',
+        'fall': '가을',
+        'winter': '겨울'
+    }
+    
+    return queryset.filter(season = season_map.get(season))
 
 
 
-def select_genre(df, genre):
-    if genre == '록/메탈':
-        df = df[df['장르'] == '록/메탈']
-    elif genre == 'POP':
-        df = df[df['장르'] == 'POP']
-    elif genre == '랩/힙합':
-        df = df[df['장르'] == '랩/힙합']
-    elif genre == '발라드':
-        df = df[df['장르'] == '발라드']
-    elif genre == '댄스':
-        df = df[df['장르'] == '댄스']
-    else:
-        df = df[df['장르'] == '국내드라마']
+def select_genre(queryset, genre):
+    genre_map = {
+        '록/메탈': '록/메탈',
+        'POP': 'POP',
+        '랩/힙합': '랩/힙합',
+        '발라드': '발라드',
+        '댄스': '댄스',
+        '국내드라마': '국내드라마'
+    }
 
-    return df
+    return queryset.filter(genre = genre_map.get(genre))
 
 
 
 def get_pie_chart(season):
-    df_top5_genre = pd.read_csv(TOP5_GENRE)
-    df_top5_genre = select_season(df_top5_genre, season)
+    qs = GenreCount.objects.all()
+    qs = select_season(qs, season)
 
-    top5_genre = df_top5_genre['장르'].tolist()
+    top5_genre = [g.genre for g in qs]
+    top5_selector = top5_genre.copy()
     top5_genre = top5_genre + ['']
-    top5_selector = df_top5_genre['장르'].tolist()
-    top5_genre_count = df_top5_genre['count'].tolist()
+    top5_genre_count = [g.genre_count for g in qs]
     top5_genre_count = top5_genre_count + [1500 - sum(top5_genre_count)]
 
     return top5_genre, top5_genre_count, top5_selector
@@ -65,14 +43,24 @@ def get_pie_chart(season):
 
 
 def get_bar_chart(season, genre):
-    df_season_genre_top3 = pd.read_csv(TOP3_SONGS_IN_GENRE)
-    df_season_genre_top3 = select_season(df_season_genre_top3, season)
-    df_season_genre_top3 = select_genre(df_season_genre_top3, genre)
+    qs = TopSongs.objects.all()
+    qs = select_season(qs, season)
+    qs = select_genre(qs, genre)
+    
+    images_dict = {
+        img.song_name : img.album_url
+        for img in SongImage.objects.filter(song_name__in = [i.song_name for i in qs])
+    }
 
-    top3_song_names = df_season_genre_top3['곡명'].tolist()
-    top3_song_counts = df_season_genre_top3['count'].tolist()
+    top3_song_names = []
+    top3_song_counts = []
+    top3_song_images = []
+    for i in qs:
+        top3_song_names.append(i.song_name)
+        top3_song_counts.append(i.chart_count)
+        top3_song_images.append(images_dict.get(i.song_name, "https://placehold.co/150x150"))
 
-    return top3_song_names, top3_song_counts
+    return top3_song_names, top3_song_counts, top3_song_images
 
 
 

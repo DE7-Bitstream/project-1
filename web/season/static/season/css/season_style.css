@@ -16,7 +16,7 @@
 }
 
 .main_pie_chart {
-    width : 800px;
+    width : 700px;
     margin-top : 15px;
 }
 
@@ -103,4 +103,10 @@
 
 .season_list {
     padding : 20px;
+}
+
+.season_name { 
+    font-size : 18px;
+    font-weight : 800px;
+    margin-top : 20px;
 }

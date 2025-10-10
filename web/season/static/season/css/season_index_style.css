@@ -22,3 +22,9 @@ h2 {
 .season_list {
     padding : 20px;
 }
+
+.season_name { 
+    font-size : 18px;
+    font-weight : 400px;
+    margin-top : 20px;
+}

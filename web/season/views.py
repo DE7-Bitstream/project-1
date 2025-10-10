@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from django.http import JsonResponse
-from .data_processor import get_pie_chart, get_bar_chart
+from season.data_processor import get_pie_chart, get_bar_chart
 
 # Create your views here.
 def index(request):
@@ -21,8 +21,8 @@ class SpringView(generic.TemplateView):
 
         # 초기값
         selected_genre = self.request.GET.get('genre', '댄스')
-        top3_song_names, top3_song_counts = get_bar_chart(self.season, '댄스')
-        context['top3_songs'] = list(zip(top3_song_names, top3_song_counts))
+        top3_song_names, top3_song_counts, top3_song_images = get_bar_chart(self.season, '댄스')
+        context['top3_songs'] = list(zip(top3_song_names, top3_song_counts, top3_song_images))
         context['selected_genre'] = '댄스'
 
         return context
@@ -30,8 +30,8 @@ class SpringView(generic.TemplateView):
     def render_to_response(self, context, **response_kwargs):
         if self.request.GET.get('ajax') == '1':
             selected_genre = self.request.GET.get('genre', '댄스')
-            top3_song_names, top3_song_counts = get_bar_chart(self.season, selected_genre)
-            context['top3_songs'] = list(zip(top3_song_names, top3_song_counts))
+            top3_song_names, top3_song_counts, top3_song_images = get_bar_chart(self.season, selected_genre)
+            context['top3_songs'] = list(zip(top3_song_names, top3_song_counts, top3_song_images))
             context['selected_genre'] = selected_genre
 
             return JsonResponse({'top3_songs' : context['top3_songs']})
@@ -53,8 +53,8 @@ class SummerView(generic.TemplateView):
 
         # 초기값
         selected_genre = self.request.GET.get('genre', '댄스')
-        top3_song_names, top3_song_counts = get_bar_chart(self.season, '댄스')
-        context['top3_songs'] = list(zip(top3_song_names, top3_song_counts))
+        top3_song_names, top3_song_counts, top3_song_images = get_bar_chart(self.season, '댄스')
+        context['top3_songs'] = list(zip(top3_song_names, top3_song_counts, top3_song_images))
         context['selected_genre'] = '댄스'
 
         return context
@@ -62,8 +62,8 @@ class SummerView(generic.TemplateView):
     def render_to_response(self, context, **response_kwargs):
         if self.request.GET.get('ajax') == '1':
             selected_genre = self.request.GET.get('genre', '댄스')
-            top3_song_names, top3_song_counts = get_bar_chart(self.season, selected_genre)
-            context['top3_songs'] = list(zip(top3_song_names, top3_song_counts))
+            top3_song_names, top3_song_counts, top3_song_images = get_bar_chart(self.season, selected_genre)
+            context['top3_songs'] = list(zip(top3_song_names, top3_song_counts, top3_song_images))
             context['selected_genre'] = selected_genre
 
             return JsonResponse({'top3_songs' : context['top3_songs']})
@@ -84,8 +84,8 @@ class FallView(generic.TemplateView):
 
         # 초기값
         selected_genre = self.request.GET.get('genre', '댄스')
-        top3_song_names, top3_song_counts = get_bar_chart(self.season, '댄스')
-        context['top3_songs'] = list(zip(top3_song_names, top3_song_counts))
+        top3_song_names, top3_song_counts, top3_song_images = get_bar_chart(self.season, '댄스')
+        context['top3_songs'] = list(zip(top3_song_names, top3_song_counts, top3_song_images))
         context['selected_genre'] = '댄스'
 
         return context
@@ -93,8 +93,8 @@ class FallView(generic.TemplateView):
     def render_to_response(self, context, **response_kwargs):
         if self.request.GET.get('ajax') == '1':
             selected_genre = self.request.GET.get('genre', '댄스')
-            top3_song_names, top3_song_counts = get_bar_chart(self.season, selected_genre)
-            context['top3_songs'] = list(zip(top3_song_names, top3_song_counts))
+            top3_song_names, top3_song_counts, top3_song_images = get_bar_chart(self.season, selected_genre)
+            context['top3_songs'] = list(zip(top3_song_names, top3_song_counts, top3_song_images))
             context['selected_genre'] = selected_genre
 
             return JsonResponse({'top3_songs' : context['top3_songs']})
@@ -115,8 +115,8 @@ class WinterView(generic.TemplateView):
 
         # 초기값
         selected_genre = self.request.GET.get('genre', '댄스')
-        top3_song_names, top3_song_counts = get_bar_chart(self.season, '댄스')
-        context['top3_songs'] = list(zip(top3_song_names, top3_song_counts))
+        top3_song_names, top3_song_counts, top3_song_images = get_bar_chart(self.season, '댄스')
+        context['top3_songs'] = list(zip(top3_song_names, top3_song_counts, top3_song_images))
         context['selected_genre'] = '댄스'
 
         return context
@@ -124,8 +124,8 @@ class WinterView(generic.TemplateView):
     def render_to_response(self, context, **response_kwargs):
         if self.request.GET.get('ajax') == '1':
             selected_genre = self.request.GET.get('genre', '댄스')
-            top3_song_names, top3_song_counts = get_bar_chart(self.season, selected_genre)
-            context['top3_songs'] = list(zip(top3_song_names, top3_song_counts))
+            top3_song_names, top3_song_counts, top3_song_images = get_bar_chart(self.season, selected_genre)
+            context['top3_songs'] = list(zip(top3_song_names, top3_song_counts, top3_song_images))
             context['selected_genre'] = selected_genre
 
             return JsonResponse({'top3_songs' : context['top3_songs']})

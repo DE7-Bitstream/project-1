@@ -12,16 +12,16 @@
     </div>
 
     <div class = 'single_section'>
-        <div class = 'section_title_long'>장르별 차트 진입 횟수 TOP 5 노래</div>
+        <div class = 'section_title_long'>장르별 차트 진입 횟수 TOP 3 노래</div>
         <div class = 'double_section'>
             <div class = 'section_left'>
                 <a id = 'album_title'>{{ selected_genre }} TOP 3</a>
 
                 <div class="top3_song">
-                    {% for name, count in top3_songs %}
+                    {% for name, count, img_url in top3_songs %}
                     <div class="top_song">
                         <a class="rank">{{ forloop.counter }}</a>
-                        <img src="https://placehold.co/200x200" width="150" height="150" alt="{{ forloop.counter }}"> 
+                        <img src="{{ img_url }}" width="150" height="150" alt="{{ forloop.counter }}"> 
                         <a class='song_name'>{{ name }}</a>
                         <a class='song_count'>차트 진입 : {{ count }}회</a>
                     </div>
@@ -52,7 +52,7 @@
             <dl class = 'season_list'>
                 <dd>
                     <a class = 'season_image' href = '{% url "season:season_spring" %}'>
-                        <img src = 'https://placehold.co/150x150'>
+                        <img src = 'https://cdn-icons-png.flaticon.com/128/10129/10129544.png' width = 150, height = 150>
                     </a>
                 </dd>
                 <dd>
@@ -62,7 +62,7 @@
             <dl class = 'season_list'>
                 <dd>
                     <a class = 'season_image' href = '{% url "season:season_fall" %}'>
-                        <img src = 'https://placehold.co/150x150'>
+                        <img src = 'https://cdn-icons-png.flaticon.com/128/2146/2146386.png' width = 150, height = 150>
                     </a>
                 </dd>
                 <dd>
@@ -72,7 +72,7 @@
             <dl class = 'season_list'>
                 <dd>
                     <a class = 'season_image' href = '{% url "season:season_winter" %}'>
-                        <img src = 'https://placehold.co/150x150'>
+                        <img src = 'https://cdn-icons-png.flaticon.com/128/667/667664.png' width = 150, height = 150>
                     </a>
                 </dd>
                 <dd>
