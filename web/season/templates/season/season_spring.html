@@ -46,38 +46,40 @@
         </div>
     </div>
 
-    <div class = section_title>다른 계절 보기</div>
-    <div class = 'list_wrapper'>
-        <dl class = 'season_list'>
-            <dd>
-                <a class = 'season_image' href = '{% url "season:season_summer" %}'>
-                    <img src = 'https://placehold.co/150x150'>
-                </a>
-            </dd>
-            <dd>
-                <span class = 'season_name'>여름</span>
-            </dd>
-        </dl>
-        <dl class = 'season_list'>
-            <dd>
-                <a class = 'season_image' href = '{% url "season:season_fall" %}'>
-                    <img src = 'https://placehold.co/150x150'>
-                </a>
-            </dd>
-            <dd>
-                <span class = 'season_name'>가을</span>
-            </dd>
-        </dl>
-        <dl class = 'season_list'>
-            <dd>
-                <a class = 'season_image' href = '{% url "season:season_winter" %}'>
-                    <img src = 'https://placehold.co/150x150'>
-                </a>
-            </dd>
-            <dd>
-                <span class = 'season_name'>겨울</span>
-            </dd>
-        </dl>
+    <div class = 'single_section'>
+        <div class = 'section_title'>다른 계절 보기</div>
+        <div class = 'list_wrapper'>
+            <dl class = 'season_list'>
+                <dd>
+                    <a class = 'season_image' href = '{% url "season:season_summer" %}'>
+                        <img src = 'https://placehold.co/150x150'>
+                    </a>
+                </dd>
+                <dd>
+                    <span class = 'season_name'>여름</span>
+                </dd>
+            </dl>
+            <dl class = 'season_list'>
+                <dd>
+                    <a class = 'season_image' href = '{% url "season:season_fall" %}'>
+                        <img src = 'https://placehold.co/150x150'>
+                    </a>
+                </dd>
+                <dd>
+                    <span class = 'season_name'>가을</span>
+                </dd>
+            </dl>
+            <dl class = 'season_list'>
+                <dd>
+                    <a class = 'season_image' href = '{% url "season:season_winter" %}'>
+                        <img src = 'https://placehold.co/150x150'>
+                    </a>
+                </dd>
+                <dd>
+                    <span class = 'season_name'>겨울</span>
+                </dd>
+            </dl>
+        </div>
     </div>
 
     {{ top5_genre|json_script:"top5Genre" }}
