@@ -16,7 +16,7 @@
 }
 
 .main_pie_chart {
-    width : 800px;
+    width : 700px;
     margin-top : 15px;
 }
 
@@ -41,7 +41,11 @@
     display : flex;
     flex-direction : column;
     align-items: center;
-    margin-left : 150px;
+    margin-left : 400px;
+}
+
+.section_right {
+    margin-right : 100px;
 }
 
 #album_title {
@@ -53,7 +57,7 @@
 .top3_song {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 30px;
 }
 
 .rank {
@@ -75,14 +79,7 @@
 
 .section_right {
     width : 60%;
-}
-
-.section_content {
-    width : 650px;
-    flex: 1;
-    display: block;
-    justify-content: center;
-    align-items: center;
+    height : 500px;
 }
 
 .top_song {
@@ -97,23 +94,19 @@
     margin-top : 15px;
 }
 
-#section_2nd {
-    margin-top : 100px;
-}
-
-.main_chart_row {
-    display : flex;
-    justify-content : center;
-    align-items : center;
-    gap : 40px;
-}
-
 .list_wrapper {
     display : flex;
     justify-content : center;
     text-align : center;
+    margin-right : 45px;
 }
 
 .season_list {
     padding : 20px;
+}
+
+.season_name { 
+    font-size : 18px;
+    font-weight : 800px;
+    margin-top : 20px;
 }

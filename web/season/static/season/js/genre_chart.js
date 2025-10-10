@@ -37,7 +37,7 @@ document.getElementById('select_genre').addEventListener('change', async functio
         div.className = 'top_song';
         div.innerHTML = `
             <a class="rank">${index + 1}</a>
-            <img src="https://placehold.co/200x200" width="150" height="150" alt="${index + 1}">
+            <img src="${item[2]}" width="150" height="150" alt="${index + 1}">
             <a class='song_name'>${item[0]}</a>
             <a class='song_count'>차트 진입 : ${item[1]}회</a>
         `;
