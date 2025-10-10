@@ -26,13 +26,6 @@
     </div>
 </div>
 
-<!-- 디버깅 정보 -->
-<div class="debug-info">
-    <h3>디버깅 정보:</h3>
-    <p><strong>장르:</strong> {{ genre }}</p>
-    <p><strong>예상 파일명:</strong> wordcloud_{{ genre }}.png</p>
-    <p><strong>이미지 경로:</strong> {% static 'lyrics/images/wordcloud_'|add:genre|add:'.png' %}</p>
-</div>
 
 <style>
 .back-btn {
