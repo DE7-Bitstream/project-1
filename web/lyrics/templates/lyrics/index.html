@@ -11,28 +11,28 @@
 <div class="genre-grid">
     <a href="{% url 'wordcloud' %}?genre=발라드" class="genre-item">
         <div class="genre-image">
-            <!-- 이미지 대신 placeholder -->
+            <img src="{% static 'lyrics/images/발라드.png' %}" alt="발라드 워드클라우드">
         </div>
         <div class="genre-label">발라드</div>
     </a>
     
     <a href="{% url 'wordcloud' %}?genre=댄스" class="genre-item">
         <div class="genre-image">
-            <!-- 이미지 대신 placeholder -->
+            <img src="{% static 'lyrics/images/댄스.png' %}" alt="댄스 워드클라우드">
         </div>
         <div class="genre-label">댄스</div>
     </a>
     
     <a href="{% url 'wordcloud' %}?genre=랩_힙합" class="genre-item">
         <div class="genre-image">
-            <!-- 이미지 대신 placeholder -->
+            <img src="{% static 'lyrics/images/힙합.png' %}" alt="랩&힙합 워드클라우드">
         </div>
         <div class="genre-label">랩/힙합</div>
     </a>
     
     <a href="{% url 'wordcloud' %}?genre=록_메탈" class="genre-item">
         <div class="genre-image">
-            <!-- 이미지 대신 placeholder -->
+            <img src="{% static 'lyrics/images/락.png' %}" alt="록&메탈 워드클라우드">
         </div>
         <div class="genre-label">록/메탈</div>
     </a>
@@ -63,11 +63,12 @@
 /* 장르 그리드 */
 .genre-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 250px);
     gap: 60px;
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 40px;
+    justify-content: center;
 }
 
 /* 장르 아이템 */
@@ -84,22 +85,28 @@
     color: #333;
 }
 
-/* 장르 이미지 (빈 박스) */
+/* 장르 이미지 */
 .genre-image {
     width: 100%;
     aspect-ratio: 1;
-    background-color: #D3D3D3;
+    background-color: #f5f5f5;
     border-radius: 0;
     margin-bottom: 20px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #999;
-    font-size: 14px;
 }
 
-.genre-image::before {
-    content: "250 × 250";
+.genre-image img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.genre-item:hover .genre-image img {
+    transform: scale(1.05);
 }
 
 /* 장르 라벨 */
