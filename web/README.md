@@ -16,3 +16,8 @@ python manage.py load_weekly_chart
 ```python
 python manage.py load_hitmakers_data
 ```
+
+- season 데이터
+```python
+python manage.py season_table_create
+```
