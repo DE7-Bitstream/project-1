@@ -1,12 +1,52 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block content %}
-<div class="container mx-auto p-8 max-w-lg bg-white shadow-xl rounded-xl mt-10 text-center">
-<h2 class="text-3xl font-extrabold text-indigo-700 mb-4">
-여긴 hitmakers 페이지입니다 (Index)
-</h2>
-<p class="text-xl tesxt-gray-600">
-파이팅.
-</p>
+<link rel="stylesheet" href="{% static 'hitmakers/css/style.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script> 
+<h1>히트메이커 분석</h1>
+
+<div class="hitmakers-wrapper">
+
+    <div class="filter-section">
+        <div class="filter-group">
+            <label for="year-select">연도</label>
+            <select id="year-select">
+                {% for year in years %}
+                <option value="{{ year }}" {% if forloop.first %}selected{% endif %}>{{ year }}년</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="category-select">카테고리</label>
+            <select id="category-select">
+                <option value="기획사" selected>기획사</option>
+                <option value="유통사">유통사</option>
+                <option value="작곡가">작곡가</option>
+                <option value="작사가">작사가</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="content-grid">
+        <!-- 왼쪽: 도넛 차트 -->
+        <div class="chart-container">
+            <h2 id="chart-title">2024년 TOP5 기획사</h2>
+            <div class="chart-wrapper">
+                <canvas id="donut-chart"></canvas>
+            </div>
+        </div>
+
+        <!-- 오른쪽: 상위 곡 테이블 -->
+        <div class="table-container">
+            <h2 id="table-title">대표 곡</h2>
+            <div id="song-table-wrapper">
+                <p class="empty-message">차트를 클릭하여 곡을 확인하세요</p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script src="{% static 'hitmakers/js/hitmakers-chart.js' %}"></script>
 {% endblock %}
