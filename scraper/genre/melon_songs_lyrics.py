@@ -16,9 +16,9 @@ options.add_argument("--headless")   # 필요시만 사용
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument(
-    "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/140.0.0.0 Safari/537.36"
+    "Chrome/120.0.0.0 Safari/537.36"
 )
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
@@ -44,7 +44,7 @@ def get_melon_lyrics(song_id: str) -> str:
 
 # ====== 메인 실행 ======
 def main():
-    csv_path = r"C:\Users\yoond\Web Scrapping\csv\melon_genre_steady_songs.csv"
+    csv_path = r"/Users/yoond/Documents/GitHub/project-1/scraper/genre/csv/melon_genre_steady_songs.csv"
     df = pd.read_csv(csv_path)
 
     lyrics_list = []
@@ -66,7 +66,7 @@ def main():
     # DataFrame에 가사 추가
     df["lyrics"] = lyrics_list
 
-    save_path = r"C:\Users\yoond\Web Scrapping\csv\melon_genre_steady_songs_with_lyrics.csv"
+    save_path = r"/Users/yoond/Documents/GitHub/project-1/scraper/genre/csv/melon_genre_steady_songs_with_lyrics.csv"
     df.to_csv(save_path, index=False, encoding="utf-8-sig")
     print(f"\n✅ 가사 저장 완료: {save_path}")
     print(df.head())

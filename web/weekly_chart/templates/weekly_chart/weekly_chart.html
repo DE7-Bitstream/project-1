@@ -27,7 +27,7 @@
 
         <!-- Form -->
         <div class="form-area" style="margin: 20px auto;">
-            <form method="post" action="{% url 'weekly_chart' %}" id="filterForm">
+            <form method="post" action="{% url 'weekly_chart:weekly_chart_index' %}" id="filterForm">
                 {% csrf_token %}
                 <!-- 시작 연도/월 -->
                 <label>시작 연도:</label>

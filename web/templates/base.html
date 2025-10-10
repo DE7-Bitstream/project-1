@@ -149,8 +149,11 @@
         </header>
         
         <nav>
-            <a href="{% url 'scraper:index' %}">홈</a>
-            <a href="{% url 'scraper:wordcloud' %}">워드클라우드</a>
+            <a href="{% url 'lyrics_index' %}">가사 분석</a>
+            <a href="{% url 'wordcloud' %}">워드클라우드</a>
+            <a href="/weekly_chart/">주간 차트</a>
+            <a href="/season/">시즌별 분석</a>
+            <a href="/hitmakers/">히트메이커</a>
             <a href="/admin/">관리자</a>
         </nav>
         

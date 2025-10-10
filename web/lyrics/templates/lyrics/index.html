@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<!-- 메인 헤더 -->
+<div class="main-header">
+    <h1>🎵 장르별 가사 워드클라우드</h1>
+    <p>원하는 장르를 선택하여 가사 분석 결과를 확인해보세요</p>
+</div>
+
+<!-- 장르 선택 그리드 -->
+<div class="genre-selection-grid">
+    <a href="{% url 'wordcloud' %}?genre=발라드" class="genre-card">
+        <div class="genre-icon">💙</div>
+        <h3>발라드</h3>
+        <p>감성적이고 서정적인 가사</p>
+    </a>
+    
+    <a href="{% url 'wordcloud' %}?genre=댄스" class="genre-card">
+        <div class="genre-icon">💃</div>
+        <h3>댄스</h3>
+        <p>에너지 넘치는 리듬감</p>
+    </a>
+    
+    <a href="{% url 'wordcloud' %}?genre=랩_힙합" class="genre-card">
+        <div class="genre-icon">🎤</div>
+        <h3>랩/힙합</h3>
+        <p>자유롭고 강렬한 표현</p>
+    </a>
+    
+    <a href="{% url 'wordcloud' %}?genre=록_메탈" class="genre-card">
+        <div class="genre-icon">🤘</div>
+        <h3>록/메탈</h3>
+        <p>파워풀하고 역동적</p>
+    </a>
+</div>
+
+<div class="info-box">
+    <p><strong>📊 분석 정보:</strong> 멜론 차트 상위곡 가사에서 추출한 실제 데이터</p>
+    <p><strong>🔤 언어 처리:</strong> KoNLPy를 사용한 한국어 형태소 분석</p>
+</div>
+
+<style>
+.main-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px;
+}
+
+.main-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.main-header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.genre-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.genre-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.genre-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+    border-color: #667eea;
+    text-decoration: none;
+    color: #333;
+}
+
+.genre-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.genre-card h3 {
+    color: #667eea;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.genre-card p {
+    color: #666;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+.info-box {
+    text-align: center;
+    margin-top: 40px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border-left: 5px solid #667eea;
+}
+</style>
+{% endblock %}
