@@ -11,7 +11,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
 # ========= 설정 =========
-HEADLESS = False  # 처음엔 False로 돌려서 눈으로 확인 권장. 안정화되면 True로 변경
+HEADLESS = True  # 처음엔 False로 돌려서 눈으로 확인 권장. 안정화되면 True로 변경
 PAGE_SLEEP = 2.0  # 페이지 로딩 대기
 ROW_SLEEP = 0.5   # 과도한 요청 방지
 
