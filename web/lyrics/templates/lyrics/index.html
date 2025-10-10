@@ -1,114 +1,132 @@
-<!-- 파일경로: web/lyrics/templates/lyrics/index.html -->
-{% extends 'base.html' %}
-
-{% block title %}멜론 장르별 가사 분석{% endblock %}
-
-{% block extra_css %}
-<style>
-    .genre-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-        margin-top: 30px;
-    }
-    
-    .genre-card {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        border-radius: 15px;
-        padding: 30px 20px;
-        text-align: center;
-        text-decoration: none;
-        color: #333;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .genre-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
-        border-color: #667eea;
-        text-decoration: none;
-        color: #333;
-    }
-    
-    .genre-icon {
-        font-size: 3.5em;
-        margin-bottom: 15px;
-        display: block;
-    }
-    
-    .genre-name {
-        font-size: 1.6em;
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: #667eea;
-    }
-    
-    .genre-desc {
-        font-size: 1em;
-        opacity: 0.7;
-        line-height: 1.4;
-    }
-    
-    .stats-box {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 25px;
-        border-radius: 15px;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-</style>
-{% endblock %}
+{% extends "layout.html" %}
+{% load static %}
 
 {% block content %}
-<div class="stats-box">
-    <h3>📊 분석 현황</h3>
-    <p>총 {{ total_songs|default:"0" }}곡 분석 완료 | {{ total_words|default:"0" }}개 단어 추출</p>
+<!-- 메인 헤더 -->
+<div class="main-header">
+    <h1>장르별 가사 분석</h1>
 </div>
 
+<!-- 장르 선택 그리드 -->
 <div class="genre-grid">
-    <a href="{% url 'wordcloud' %}?genre=발라드" class="genre-card">
-        <span class="genre-icon">💙</span>
-        <div class="genre-name">발라드</div>
-        <div class="genre-desc">감성적이고 서정적인 가사</div>
+    <a href="{% url 'wordcloud' %}?genre=발라드" class="genre-item">
+        <div class="genre-image">
+            <!-- 이미지 대신 placeholder -->
+        </div>
+        <div class="genre-label">발라드</div>
     </a>
-
-    <a href="{% url 'wordcloud' %}?genre=댄스" class="genre-card">
-        <span class="genre-icon">💃</span>
-        <div class="genre-name">댄스</div>
-        <div class="genre-desc">에너지 넘치는 리듬감</div>
+    
+    <a href="{% url 'wordcloud' %}?genre=댄스" class="genre-item">
+        <div class="genre-image">
+            <!-- 이미지 대신 placeholder -->
+        </div>
+        <div class="genre-label">댄스</div>
     </a>
-
-    <a href="{% url 'wordcloud' %}?genre=힙합" class="genre-card">
-        <span class="genre-icon">🎤</span>
-        <div class="genre-name">힙합</div>
-        <div class="genre-desc">자유롭고 강렬한 표현</div>
+    
+    <a href="{% url 'wordcloud' %}?genre=랩_힙합" class="genre-item">
+        <div class="genre-image">
+            <!-- 이미지 대신 placeholder -->
+        </div>
+        <div class="genre-label">랩/힙합</div>
     </a>
-
-    <a href="{% url 'wordcloud' %}?genre=록" class="genre-card">
-        <span class="genre-icon">🤘</span>
-        <div class="genre-name">록</div>
-        <div class="genre-desc">파워풀하고 역동적</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=인디" class="genre-card">
-        <span class="genre-icon">🎸</span>
-        <div class="genre-name">인디</div>
-        <div class="genre-desc">독창적이고 개성있는</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=트로트" class="genre-card">
-        <span class="genre-icon">🎺</span>
-        <div class="genre-name">트로트</div>
-        <div class="genre-desc">한국 전통의 정서</div>
-    </a>
-
-    <a href="{% url 'wordcloud' %}?genre=전체" class="genre-card">
-        <span class="genre-icon">🌟</span>
-        <div class="genre-name">전체 장르</div>
-        <div class="genre-desc">모든 장르 종합 분석</div>
+    
+    <a href="{% url 'wordcloud' %}?genre=록_메탈" class="genre-item">
+        <div class="genre-image">
+            <!-- 이미지 대신 placeholder -->
+        </div>
+        <div class="genre-label">록/메탈</div>
     </a>
 </div>
+
+<style>
+/* 전체 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 메인 헤더 */
+.main-header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding-top: 40px;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* 장르 그리드 */
+.genre-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* 장르 아이템 */
+.genre-item {
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.genre-item:hover {
+    transform: translateY(-5px);
+    text-decoration: none;
+    color: #333;
+}
+
+/* 장르 이미지 (빈 박스) */
+.genre-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: #D3D3D3;
+    border-radius: 0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+}
+
+.genre-image::before {
+    content: "250 × 250";
+}
+
+/* 장르 라벨 */
+.genre-label {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 400;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .genre-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        padding: 0 20px;
+    }
+    
+    .main-header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .genre-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+</style>
 {% endblock %}
