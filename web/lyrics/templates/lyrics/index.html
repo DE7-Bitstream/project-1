@@ -2,34 +2,37 @@
 {% load static %}
 
 {% block content %}
-<!-- 전체 워드클라우드 -->
-<div class="main-wordcloud">
-    <h2>🎵 전체 장르 워드클라우드</h2>
-    <p>멜론 차트 전체 장르의 가사에서 가장 자주 사용되는 단어들</p>
-    <img src="{% static 'lyrics/images/wordcloud.png' %}" alt="전체 워드클라우드">
+<!-- 메인 헤더 -->
+<div class="main-header">
+    <h1>🎵 장르별 가사 워드클라우드</h1>
+    <p>원하는 장르를 선택하여 가사 분석 결과를 확인해보세요</p>
 </div>
 
-<!-- 장르별 워드클라우드 -->
-<div class="wordcloud-grid">
-    <div class="wordcloud-item">
+<!-- 장르 선택 그리드 -->
+<div class="genre-selection-grid">
+    <a href="{% url 'wordcloud' %}?genre=발라드" class="genre-card">
+        <div class="genre-icon">💙</div>
         <h3>발라드</h3>
-        <img src="{% static 'lyrics/images/wordcloud_발라드.png' %}" alt="발라드 워드클라우드">
-    </div>
+        <p>감성적이고 서정적인 가사</p>
+    </a>
     
-    <div class="wordcloud-item">
+    <a href="{% url 'wordcloud' %}?genre=댄스" class="genre-card">
+        <div class="genre-icon">💃</div>
         <h3>댄스</h3>
-        <img src="{% static 'lyrics/images/wordcloud_댄스.png' %}" alt="댄스 워드클라우드">
-    </div>
+        <p>에너지 넘치는 리듬감</p>
+    </a>
     
-    <div class="wordcloud-item">
+    <a href="{% url 'wordcloud' %}?genre=랩_힙합" class="genre-card">
+        <div class="genre-icon">🎤</div>
         <h3>랩/힙합</h3>
-        <img src="{% static 'lyrics/images/wordcloud_랩_힙합.png' %}" alt="랩/힙합 워드클라우드">
-    </div>
+        <p>자유롭고 강렬한 표현</p>
+    </a>
     
-    <div class="wordcloud-item">
+    <a href="{% url 'wordcloud' %}?genre=록_메탈" class="genre-card">
+        <div class="genre-icon">🤘</div>
         <h3>록/메탈</h3>
-        <img src="{% static 'lyrics/images/wordcloud_록_메탈.png' %}" alt="록/메탈 워드클라우드">
-    </div>
+        <p>파워풀하고 역동적</p>
+    </a>
 </div>
 
 <div class="info-box">
@@ -38,63 +41,77 @@
 </div>
 
 <style>
-.wordcloud-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-}
-
-.wordcloud-item {
+.main-header {
     text-align: center;
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.wordcloud-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.wordcloud-item h3 {
-    color: #667eea;
-    margin-bottom: 15px;
-    font-size: 1.4em;
-}
-
-.wordcloud-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 2px solid #f0f0f0;
-}
-
-.main-wordcloud {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 30px;
+    margin-bottom: 50px;
+    padding: 40px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border-radius: 20px;
 }
 
-.main-wordcloud img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    margin-top: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+.main-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.main-header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.genre-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.genre-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.genre-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+    border-color: #667eea;
+    text-decoration: none;
+    color: #333;
+}
+
+.genre-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.genre-card h3 {
+    color: #667eea;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.genre-card p {
+    color: #666;
+    font-size: 1.1em;
+    line-height: 1.5;
 }
 
 .info-box {
     text-align: center;
     margin-top: 40px;
-    padding: 20px;
+    padding: 25px;
     background: #f8f9fa;
-    border-radius: 10px;
+    border-radius: 15px;
+    border-left: 5px solid #667eea;
 }
 </style>
 {% endblock %}
