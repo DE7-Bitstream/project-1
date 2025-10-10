@@ -1,7 +1,104 @@
-h3 {
-    text-align : center;
-    font-size : 2rem;
-    margin-left : 45px;
+.single_section {
+    width : 100%;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    margin-bottom : 50px;
+}
+
+.section_title {
+    width : 1000px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.main_pie_chart {
+    width : 800px;
+    margin-top : 15px;
+}
+
+.section_title_long {
+    width : 1400px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.double_section {
+    width : 100%;
+    display : grid;
+    grid-template-columns : 40% 60%;
+    justify-items : center;
+}
+
+.section_left {
+    width : 40%;
+    display : flex;
+    flex-direction : column;
+    align-items: center;
+    margin-left : 150px;
+}
+
+#album_title {
+    margin-top : 10px;
+    font-size : 30px;
+    font-weight : 500;
+}
+
+.top3_song {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.rank {
+    font-size : 1.5rem;
+    font-weight: 600;
+    margin-top : 10px;
+    margin-bottom : 10px;
+}
+
+.song_name {
+    font-size : 20px;
+    font-weight : 500;
+}
+
+.song_count {
+    font-size : 14px;
+    font-weight : 450;
+}
+
+.section_right {
+    width : 60%;
+}
+
+.section_content {
+    width : 650px;
+    flex: 1;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.top_song {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom : 40px;
+}
+
+#top3SongBarChart {
+    margin-top : 15px;
+}
+
+#section_2nd {
+    margin-top : 100px;
 }
 
 .main_chart_row {
