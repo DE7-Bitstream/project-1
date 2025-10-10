@@ -3,45 +3,46 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'season/css/season_style.css' %}">
-    <section class = 'section'>
-        <article class = 'section_left'>
-            <div class = 'section_title'>최근 5년간 봄 차트에 가장 많이 등장하는 장르 TOP 5</div>
-            <div class = 'section_content'>
-                <canvas id = "top5GenrePie"></canvas>
-            </div>
-        </article>
 
-        <article class = 'section_right'>
-            <div class = 'section_title'>각 장르별 오래 사랑받았던 노래 TOP 3</div>
-            <div class = 'section_content'>
-                <div class="top3_song">
-                    <div class="top_song">
-                        <div class="rank">1</div>
-                        <img src="https://placehold.co/150x150" alt = "노래1">
-                        <div class="song_name">노래 제목 1</div>
-                    </div>
-                    <div class="top_song">
-                        <div class="rank">2</div>
-                        <img src="https://placehold.co/150x150" alt = "노래2">
-                        <div class="song_name">노래 제목 2</div>
-                    </div>
-                    <div class="top_song">
-                        <div class="rank">3</div>
-                        <img src="https://placehold.co/150x150" alt = "노래3">
-                        <div class="song_name">노래 제목 3</div>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <div id = 'section_2nd' class = section_title>애매하다 애매해</div>
-    <div class = 'main_chart_row'>
-        <div class = "main_chart" style= "width: 900px; height: 600px;" >
-            <canvas id = "top5BarChart"></canvas>
+    <div class = 'single_section'>
+        <div class = 'section_title'>최근 5년간 봄 차트에 가장 많이 등장하는 장르 TOP 5</div>
+        <div class = 'main_pie_chart'>
+            <canvas id = "top5GenrePie"></canvas>
         </div>
-        <div class = "main_chart" style= "width: 900px; height: 600px;" >
-            <canvas id = "top5LineChart"></canvas>
+    </div>
+
+    <div class = 'single_section'>
+        <div class = 'section_title_long'>장르별 차트 진입 횟수 TOP 5 노래</div>
+        <div class = 'double_section'>
+            <div class = 'section_left'>
+                <a id = 'album_title'>{{ selected_genre }} TOP 3</a>
+
+                <div class="top3_song">
+                    {% for name, count in top3_songs %}
+                    <div class="top_song">
+                        <a class="rank">{{ forloop.counter }}</a>
+                        <img src="https://placehold.co/200x200" width="150" height="150" alt="{{ forloop.counter }}"> 
+                        <a class='song_name'>{{ name }}</a>
+                        <a class='song_count'>차트 진입 : {{ count }}회</a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <select id = 'select_genre'>
+                    {% for genre in top5_selector %}
+                    <option value = '{{ genre }}'
+                            {% if genre == selected_genre %}
+                            selected
+                            {% endif %}>
+                            {{ genre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class = 'section_right'>
+                <canvas id = "top3SongBarChart"></canvas>
+            </div>
         </div>
     </div>
 
@@ -78,14 +79,11 @@
             </dd>
         </dl>
     </div>
-    {{ top5_song_name|json_script:"top5SongName" }} 
-    {{ top5_chart_in_count|json_script:"top5ChartInCount" }}
-    {{ top5_rank_labels|json_script:"top5RankLabels" }}
-    {{ top5_rank|json_script:"top5Rank" }}
 
     {{ top5_genre|json_script:"top5Genre" }}
     {{ top5_genre_count|json_script:"top5GenreCount" }}
+    {{ top3_songs|json_script:"top3Song" }}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src = "{% static 'season/js/pie_chart.js' %}"></script>
-    <script src = "{% static 'season/js/main_chart.js' %}"></script>
+    <script src = "{% static 'season/js/genre_chart.js' %}"></script>
 {% endblock %}

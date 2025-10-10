@@ -1,8 +1,8 @@
 const pie_labels = JSON.parse(document.getElementById("top5Genre").textContent);
 const pie_data = JSON.parse(document.getElementById("top5GenreCount").textContent);
 
-const ctx = document.getElementById('top5GenrePie').getContext('2d');
-const top5GenrePie = new Chart(ctx, {
+const pie = document.getElementById('top5GenrePie').getContext('2d');
+const top5GenrePie = new Chart(pie, {
     type : 'pie',
     data : {
         labels : pie_labels,
