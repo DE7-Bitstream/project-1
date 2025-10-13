@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>주간 차트 추이</h1>
+    <div class="melon-chart">
+        <h3>{{ start_year }}년 {{ start_month }}월 ~ {{ end_year }}년 {{ end_month }}월 (Top {{ max_rank }})</h3>
+
+
+
+
+        <div class="chart-wrapper" style="display:flex; gap:20px; justify-content:center; align-items:flex-start;">
+            <!-- 캔버스 -->
+            <div class="chart-container" style="flex:1;">
+                <canvas id="weeklyChart"></canvas>
+            </div>
+
+            <!-- 가수 체크박스 리스트 -->
+            <div class="artist-filter" style="flex:0 0 200px; padding:10px; border:1px solid #ddd; border-radius:8px; background:#f9f9f9;">
+                <h4>가수 필터</h4>
+                <div id="artistCheckboxes">
+                    <!-- JS에서 체크박스 채워짐 -->
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Form -->
+        <div class="form-area" style="margin: 20px auto;">
+            <form method="post" action="{% url 'weekly_chart:weekly_chart_index' %}" id="filterForm">
+                {% csrf_token %}
+                <!-- 시작 연도/월 -->
+                <label>시작 연도:</label>
+                <select name="start_year" id="start_year">
+                    {% for y in year_list %}
+                        <option value="{{ y }}" {% if start_year == y %}selected{% endif %}>{{ y }}</option>
+                    {% endfor %}
+                </select>
+                <label>시작 월:</label>
+                <select name="start_month" id="start_month">
+                    {% for m in month_list %}
+                        <option value="{{ m }}" {% if start_month == m %}selected{% endif %}>{{ m }}월</option>
+                    {% endfor %}
+                </select>
+
+                <!-- 끝 연도/월 -->
+                <label>끝 연도:</label>
+                <select name="end_year" id="end_year">
+                    {% for y in year_list %}
+                        <option value="{{ y }}" {% if end_year == y %}selected{% endif %}>{{ y }}</option>
+                    {% endfor %}
+                </select>
+                <label>끝 월:</label>
+                <select name="end_month" id="end_month">
+                    {% for m in month_list %}
+                        <option value="{{ m }}" {% if end_month == m %}selected{% endif %}>{{ m }}월</option>
+                    {% endfor %}
+                </select>
+
+                <!-- 최대 순위 -->
+                <label>최대 순위:</label>
+                <input type="number" name="max_rank" id="max_rank" value="{{ max_rank }}" min="1" max="30">
+
+                <button type="submit">조회</button>
+            </form>
+
+            <!-- 전체 그래프 토글용 -->
+            <div style="max-width: 800px; margin: 10px auto;">
+                <button type="button" id="toggleAllBtn">전체 그래프 토글</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!------------------------------------>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'weekly_chart/css/style.css' %}">
+
+    <!-- js -->
+    {{ song_data|json_script:"song-data" }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'weekly_chart/js/weekly_chart.js' %}"></script>
+{% endblock %}

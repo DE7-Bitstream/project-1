@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>음악 데이터 분석 플랫폼</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header class="header">
+    <img src="{% static 'img/music.png' %}" alt="Music Logo" class="logo">
+    <h1>음악 데이터 분석 플랫폼</h1>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="{% url 'lyrics_index' %}">가사 분석</a></li>
+      <li><a href="{% url 'weekly_chart:weekly_chart_index' %}">주간 차트 추이</a></li>
+      <li><a href="{% url 'season:season_index' %}">계절별 유행 분석</a></li>
+      <li><a href="{% url 'hitmakers:hitmakers_index' %}">히트메이커 분석</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+    {% block content %}
+    <!-- 각자 채우기 -->
+    {% endblock %}
+  </main>
+</body>
+</html>

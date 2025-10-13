@@ -1,0 +1,112 @@
+.single_section {
+    width : 100%;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    margin-bottom : 50px;
+}
+
+.section_title {
+    width : 1000px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.main_pie_chart {
+    width : 700px;
+    margin-top : 15px;
+}
+
+.section_title_long {
+    width : 1400px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.double_section {
+    width : 100%;
+    display : grid;
+    grid-template-columns : 40% 60%;
+    justify-items : center;
+}
+
+.section_left {
+    width : 40%;
+    display : flex;
+    flex-direction : column;
+    align-items: center;
+    margin-left : 400px;
+}
+
+.section_right {
+    margin-right : 100px;
+}
+
+#album_title {
+    margin-top : 10px;
+    font-size : 30px;
+    font-weight : 500;
+}
+
+.top3_song {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.rank {
+    font-size : 1.5rem;
+    font-weight: 600;
+    margin-top : 10px;
+    margin-bottom : 10px;
+}
+
+.song_name {
+    font-size : 20px;
+    font-weight : 500;
+}
+
+.song_count {
+    font-size : 14px;
+    font-weight : 450;
+}
+
+.section_right {
+    width : 60%;
+    height : 500px;
+}
+
+.top_song {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom : 40px;
+}
+
+#top3SongBarChart {
+    margin-top : 15px;
+}
+
+.list_wrapper {
+    display : flex;
+    justify-content : center;
+    text-align : center;
+    margin-right : 45px;
+}
+
+.season_list {
+    padding : 20px;
+}
+
+.season_name { 
+    font-size : 18px;
+    font-weight : 800px;
+    margin-top : 20px;
+}

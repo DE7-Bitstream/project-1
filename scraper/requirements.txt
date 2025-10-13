@@ -1,0 +1,18 @@
+# Web Scraping
+beautifulsoup4>=4.14.0
+requests>=2.32.5
+selenium>=4.35.0
+webdriver-manager>=4.0.0  # ChromeDriverManager 사용을 위해 필요
+
+# Data Processing
+pandas>=2.3.2
+python-dateutil>=2.9.0.post0
+
+# Text Analysis
+konlpy>=0.6.0  # 한국어 형태소 분석 (lyrics_analysis.py에서 사용)
+
+# Visualization
+matplotlib>=3.10.6
+wordcloud>=1.9.0  # 워드클라우드 생성 (lyrics_analysis.py에서 사용)
+
+# Note: datetime은 Python 표준 라이브러리이므로 설치 불필요

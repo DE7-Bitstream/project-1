@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<!-- 메인 헤더 -->
+<div class="main-header">
+    <h1>장르별 가사 분석</h1>
+</div>
+
+<!-- 장르 선택 그리드 -->
+<div class="genre-grid">
+    <a href="{% url 'wordcloud' %}?genre=발라드" class="genre-item">
+        <div class="genre-image">
+            <img src="{% static 'lyrics/images/발라드.png' %}" alt="발라드 워드클라우드">
+        </div>
+        <div class="genre-label">발라드</div>
+    </a>
+    
+    <a href="{% url 'wordcloud' %}?genre=댄스" class="genre-item">
+        <div class="genre-image">
+            <img src="{% static 'lyrics/images/댄스.png' %}" alt="댄스 워드클라우드">
+        </div>
+        <div class="genre-label">댄스</div>
+    </a>
+    
+    <a href="{% url 'wordcloud' %}?genre=랩_힙합" class="genre-item">
+        <div class="genre-image">
+            <img src="{% static 'lyrics/images/힙합.png' %}" alt="랩&힙합 워드클라우드">
+        </div>
+        <div class="genre-label">랩/힙합</div>
+    </a>
+    
+    <a href="{% url 'wordcloud' %}?genre=록_메탈" class="genre-item">
+        <div class="genre-image">
+            <img src="{% static 'lyrics/images/락.png' %}" alt="록&메탈 워드클라우드">
+        </div>
+        <div class="genre-label">록/메탈</div>
+    </a>
+</div>
+
+<style>
+/* 전체 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 메인 헤더 */
+.main-header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding-top: 40px;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* 장르 그리드 */
+.genre-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 250px);
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+    justify-content: center;
+}
+
+/* 장르 아이템 */
+.genre-item {
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.genre-item:hover {
+    transform: translateY(-5px);
+    text-decoration: none;
+    color: #333;
+}
+
+/* 장르 이미지 */
+.genre-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: #f5f5f5;
+    border-radius: 0;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre-image img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.genre-item:hover .genre-image img {
+    transform: scale(1.05);
+}
+
+/* 장르 라벨 */
+.genre-label {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 400;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .genre-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        padding: 0 20px;
+    }
+    
+    .main-header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .genre-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+</style>
+{% endblock %}

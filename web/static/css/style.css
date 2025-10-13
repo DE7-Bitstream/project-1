@@ -1,0 +1,59 @@
+/* 전체 */
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+
+/* 헤더 */
+.header {
+  background: linear-gradient(90deg, #2D2D2D, #000000);
+  color: white;
+  padding: 20px 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  display: flex;              
+  align-items: center;        
+  gap: 15px;                 
+
+}
+
+/* 네비게이션바 */
+.navbar {
+  background: linear-gradient(90deg, #009688, #00695c);
+}
+
+.navbar ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar li {
+  flex: 1; 
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  height: 60px; 
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  text-align: center;
+  line-height: 1.4rem;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* 메인  */
+.content {
+  padding: 40px;
+}

@@ -1,0 +1,30 @@
+.season_title {
+    text-align : center;
+}
+
+h2 {
+    font-size : 2.5rem;
+    margin-bottom : 0px;
+}
+
+.description {
+    font-size : 0.9rem;
+    margin-top : 0px;
+    color : #868e96;
+}
+
+.list_wrapper {
+    display : flex;
+    justify-content : center;
+    text-align : center;
+}
+
+.season_list {
+    padding : 20px;
+}
+
+.season_name { 
+    font-size : 18px;
+    font-weight : 400px;
+    margin-top : 20px;
+}

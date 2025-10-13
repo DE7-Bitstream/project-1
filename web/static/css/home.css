@@ -1,0 +1,239 @@
+/* 메인 컨테이너 */
+.home-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #0E0E0E;
+    overflow: hidden;
+}
+
+/* 배경 이미지 */
+.home-background {
+    position: absolute;
+    width: 100%;
+    height: 857px;
+    left: 0px;
+    top: -141px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 91.37%);
+}
+
+/* 네비게이션 버튼 공통 스타일 */
+.nav-button {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 18px;
+    gap: 10px;
+    border: 1px solid #A9DDFF;
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: 'Pretendard', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    background: #A9DDFF;
+    color: #0E0E0E;
+    text-decoration: none;
+}
+
+/* KPOP 연간차트 버튼 */
+.kpop-chart-btn {
+    position: absolute;
+    width: 188px;
+    height: 44px;
+    left: 1488px;
+    top: 580px;
+}
+
+/* 계절별 유행 버튼 */
+.season-btn {
+    position: absolute;
+    width: 146px;
+    height: 44px;
+    left: 1098px;
+    top: 654px;
+}
+
+/* 주간 차트 버튼 */
+.weekly-btn {
+    position: absolute;
+    width: 125px;
+    height: 44px;
+    left: 688px;
+    top: 593px;
+}
+
+/* 장르별 가사 버튼 */
+.lyrics-btn {
+    position: absolute;
+    width: 146px;
+    height: 44px;
+    left: 258px;
+    top: 661px;
+}
+
+/* 메인 타이틀 */
+.main-title {
+    position: absolute;
+    width: 375px;
+    height: 112px;
+    left: calc(50% - 375px/2 - 0.5px);
+    top: 305px;
+    font-family: 'Pretendard', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 140%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+/* 구분선 */
+.divider {
+    position: absolute;
+    width: 63.5px;
+    height: 0px;
+    left: 931.5px;
+    top: 449px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* 워드클라우드 링크 */
+.wordcloud-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    position: absolute;
+    width: 280px;
+    height: 20px;
+    left: calc(50% - 280px/2 - 1px);
+    top: 487px;
+}
+
+.wordcloud-text {
+    width: 227px;
+    height: 20px;
+    font-family: 'Pretendard', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    color: #FFFFFF;
+}
+
+.wordcloud-arrow {
+    width: 37px;
+    height: 0px;
+    border: 2px solid #FFFFFF;
+}
+
+/* 이미지 카드들 */
+.image-card {
+    position: absolute;
+    border-radius: 20px;
+    background: #FFFFFF;
+}
+
+.image-card-1 {
+    width: 360px;
+    height: 470px;
+    left: 991px;
+    top: 721px;
+}
+
+.image-card-2 {
+    width: 360px;
+    height: 562px;
+    left: 571px;
+    top: 654px;
+}
+
+.image-card-3 {
+    width: 360px;
+    height: 562px;
+    left: 1411px;
+    top: 654px;
+}
+
+.image-card-4 {
+    width: 360px;
+    height: 384px;
+    left: 151px;
+    top: 721px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #FFFFFF;
+    opacity: 0.8;
+    border-radius: 25px;
+}
+
+/* 헤더 */
+.home-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 205px;
+    position: absolute;
+    width: 1806px;
+    height: 94px;
+    left: 57px;
+    top: 50px;
+}
+
+/* 로고 섹션 */
+.logo-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 12px;
+    width: 495px;
+    height: 44px;
+}
+
+.music-icon {
+    width: 62px;
+    height: 62px;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 50%;
+}
+
+.logo-text {
+    width: 421px;
+    height: 45px;
+    font-family: 'Pretendard', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 45px;
+    line-height: 100%;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+/* 네비게이션 섹션 */
+.nav-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    gap: 100px;
+    width: 905px;
+    height: 44px;
+}

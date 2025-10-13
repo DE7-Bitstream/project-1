@@ -1,0 +1,4 @@
+# Web Framework
+django>=5.2.6
+# Data Processing (CSV 로딩용)
+pandas>=2.3.2
