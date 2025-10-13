@@ -21,11 +21,8 @@ options.add_argument(
     "Chrome/120.0.0.0 Safari/537.36"
 )
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-wait = WebDriverWait(driver, 10)
-
 # ====== 가사 가져오기 함수 ======
-def get_melon_lyrics(song_id: str) -> str:
+def get_melon_lyrics(driver, wait, song_id: str) -> str:
     """멜론 곡 상세 페이지에서 가사 추출"""
     url = f"https://www.melon.com/song/detail.htm?songId={song_id}"
     driver.get(url)
@@ -44,33 +41,57 @@ def get_melon_lyrics(song_id: str) -> str:
 
 # ====== 메인 실행 ======
 def main():
-    csv_path = r"/Users/yoond/Documents/GitHub/project-1/scraper/genre/csv/melon_genre_steady_songs.csv"
+    """
+    가사 크롤링 메인 함수
+    
+    개선사항:
+    1. try-finally로 driver 리소스 관리
+    2. 절대 경로 -> 상대 경로 사용
+    3. 에러 발생 시에도 driver가 확실히 종료됨
+    """
+    # 절대 경로 대신 상대 경로 사용 - 다른 사람 컴퓨터에서도 작동
+    csv_path = os.path.join(os.path.dirname(__file__), "csv", "melon_genre_steady_songs.csv")
     df = pd.read_csv(csv_path)
+    
+    # driver는 함수 내에서 생성하고 관리
+    driver = None
+    try:
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        wait = WebDriverWait(driver, 10)
+        
+        lyrics_list = []
+        total = len(df)
 
-    lyrics_list = []
-    total = len(df)
+        for idx, row in df.iterrows():
+            song_id = row["songId"]
 
-    for idx, row in df.iterrows():
-        song_id = row["songId"]
+            # 가사 가져오기
+            lyrics = get_melon_lyrics(driver, wait, song_id)
+            lyrics_list.append(lyrics)
 
-        # 가사 가져오기
-        lyrics = get_melon_lyrics(song_id)
-        lyrics_list.append(lyrics)
+            # 진행률 표시
+            progress = (idx + 1) / total * 100
+            print(f"진행률: {progress:.2f}% ({idx+1}/{total})", end="\r")
 
-        # 진행률 표시
-        progress = (idx + 1) / total * 100
-        print(f"진행률: {progress:.2f}% ({idx+1}/{total})", end="\r")
+            time.sleep(1)  # 요청 간격 (차단 방지)
 
-        time.sleep(1)  # 요청 간격 (차단 방지)
+        # DataFrame에 가사 추가
+        df["lyrics"] = lyrics_list
 
-    # DataFrame에 가사 추가
-    df["lyrics"] = lyrics_list
-
-    save_path = r"/Users/yoond/Documents/GitHub/project-1/scraper/genre/csv/melon_genre_steady_songs_with_lyrics.csv"
-    df.to_csv(save_path, index=False, encoding="utf-8-sig")
-    print(f"\n✅ 가사 저장 완료: {save_path}")
-    print(df.head())
+        # 절대 경로 대신 상대 경로 사용
+        save_path = os.path.join(os.path.dirname(__file__), "csv", "melon_genre_steady_songs_with_lyrics.csv")
+        df.to_csv(save_path, index=False, encoding="utf-8-sig")
+        print(f"\n✅ 가사 저장 완료: {save_path}")
+        print(df.head())
+        
+    except Exception as e:
+        print(f"에러 발생: {e}")
+        raise
+    finally:
+        # 에러가 발생해도 driver를 확실히 종료
+        if driver:
+            driver.quit()
+            print("WebDriver 종료 완료")
 
 if __name__ == "__main__":
     main()
-    driver.quit()

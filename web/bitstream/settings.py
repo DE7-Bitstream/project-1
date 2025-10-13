@@ -21,12 +21,16 @@ SEASON_DATAFRAME_DIR = os.path.join(BASE_DIR, 'dataframes/season')
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-grw-6bg(-#vyuvq1=r1qoq=%4qyz#i5b&n@3!59ooaldhajl#-'
+# TODO: 환경변수로 관리해야 합니다! 절대 코드에 하드코딩 X
+# export SECRET_KEY='your-secret-key-here'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-grw-6bg(-#vyuvq1=r1qoq=%4qyz#i5b&n@3!59ooaldhajl#-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# TODO: 실제 배포 시에는 반드시 False로 설정
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+# TODO: 배포 시 실제 도메인을 추가
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
 
 
 # Application definition
