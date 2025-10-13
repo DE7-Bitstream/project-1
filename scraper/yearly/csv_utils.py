@@ -1,9 +1,10 @@
 import os
 import csv
+from typing import List, Set, Union
 import pandas as pd
 
-def get_csv_full_path(file_name):
-    csv_dir = os.path.join(os.getcwd() , 'csv')
+def get_csv_full_path(file_name: str) -> str:
+    csv_dir = os.path.join(os.getcwd(), 'csv')
     if not os.path.exists(csv_dir):
         os.makedirs(csv_dir)
     if file_name[-4:] != '.csv':
@@ -13,8 +14,8 @@ def get_csv_full_path(file_name):
 
 
 
-def write_data_to_csv(file_name, data):
-    
+def write_data_to_csv(file_name: str, data: List[dict]) -> None:
+
     csv_file_path = get_csv_full_path(file_name)
 
     # 딕셔너리의 키를 필드 이름(헤더)으로 사용
@@ -27,14 +28,13 @@ def write_data_to_csv(file_name, data):
             writer.writeheader()
             # 데이터를 한 줄씩 쓰기
             writer.writerows(data)
-        print(f"✅ 성공적으로 저장: {csv_file_path}")
+        print(f"✅ 성공적으로 저장: {csv_file_path} ({len(data)}건)")
     except Exception as e:
         raise Exception(f"❌ 파일 저장 중 오류 발생: {e}")
 
 
 
-def get_column_unique_data(file_name, column_names):
-
+def get_column_unique_data(file_name: str, column_names: Union[str, List[str]]) -> List:
     csv_file_path = get_csv_full_path(file_name)
     
     try:
@@ -56,8 +56,7 @@ def get_column_unique_data(file_name, column_names):
     
 
 
-def extract_unique_ids_from_piped_data(file_name, columns_name):
-
+def extract_unique_ids_from_piped_data(file_name: str, columns_name: List[str]) -> Set[str]:
     unique_id_set = set()
 
     csv_file_path = get_csv_full_path(file_name)
